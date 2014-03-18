@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Connecter";
+}
+
+<h2>Connexion</h2>
+@Html.ValidationSummary("", new { style = "width:100%; text-align:center; margin-top:25px;" })
+
+@using (Html.BeginForm())
+{
+    <table>
+        @*<tr>
+                <td>Type :</td>
+                <td>
+                    @Html.RadioButton("kind", "commercial", true, new { @id = "commercial" }) <label for="commercial">Commercial</label>
+                    @Html.RadioButton("kind", "client", false, new { @id = "client" }) <label for="client">Client</label>
+                </td>
+            </tr>*@
+        <tr>
+            <td>
+                <label for="reference">Référence :</label>
+            </td>
+            <td>
+                @Html.TextBox("username")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="mdp">Mot de passe :</label>
+            </td>
+            <td>
+                @Html.TextBox("password")
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <input type="submit" class="button radius expand" value="Se connecter" />
+            </td>
+        </tr>
+    </table>
+}

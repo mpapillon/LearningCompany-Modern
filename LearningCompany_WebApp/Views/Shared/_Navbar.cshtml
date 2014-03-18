@@ -1,0 +1,44 @@
+﻿<nav class="top-bar" data-topbar data-options="is_hover: false">
+    <ul class="title-area">
+        <li class="name">
+            <h1>@*@Html.ActionLink("Learning Company", "Index", "Home")*@</h1>
+        </li>
+        <li class="toggle-topbar menu-icon">
+            <a href="#">Menu</a>
+        </li>
+    </ul>
+
+    <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+            @if (Request.IsAuthenticated)
+            {
+                @*<li>@Html.ActionLink("Mon compte", "Edit", "Commercial")</li>*@
+                <li class="active">@Html.ActionLink("Déconnexion", "Logout", "Account")</li>
+            }
+            else
+            {
+                <li class="active">@Html.ActionLink("Connexion", "Login", "Account")</li>
+            }
+        </ul>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+                <!-- Left Nav Section -->
+            <ul class="left">
+                <li class="has-dropdown">
+                    <a href="#">Gestion des formations</a>
+                    <ul class="dropdown">
+                        <li><label>Formations</label></li>
+                        @*<li>@Html.ActionLink("Créer une Formation", "Create", "Formation")</li>*@
+                        <li class="divider"></li>
+                        <li><label>Sessions de formations</label></li>
+                        <li><a href="#">Créer une Session de formation</a></li>
+                        <li><a href="#">Gérer les Sessions de formation</a></li>
+                    </ul>
+                </li>
+            </ul>
+        }
+    </section>
+</nav>
+
