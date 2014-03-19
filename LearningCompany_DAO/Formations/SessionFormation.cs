@@ -29,7 +29,6 @@ namespace LearningCompany.Entities
 
         public virtual Formation Formation { get; set; }
 
-        [Required]
         public int FormateurID { get; set; }
         public virtual Formateur Formateur { get; set; }
 

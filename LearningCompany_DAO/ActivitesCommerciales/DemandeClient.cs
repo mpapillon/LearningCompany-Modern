@@ -14,7 +14,7 @@ namespace LearningCompany.Entities
         public int DemandeClientID { get; set; }
 
         [Key]
-        [Column(Order = 2)]
+        [Column(Order = 2), Index]
         public int FormationID { get; set; }
 
         [Required]
@@ -23,6 +23,7 @@ namespace LearningCompany.Entities
         public DateTime? DateTraitement { get; set; }
 
         [Required]
+        [Index]
         public int ClientID { get; set; }
         public virtual Client Client { get; set; }
 

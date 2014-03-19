@@ -9,11 +9,6 @@ namespace LearningCompany.Entities
 {
     public class LearningCompanyContext : DbContext
     {
-        public LearningCompanyContext()
-            : base("LearningCompanyContext")
-        {
-        }
-
         public DbSet<Commercial> Commerciaux { get; set; }
         public DbSet<Formateur> Formateurs { get; set; }
         public DbSet<Stagiaire> Stagiaires { get; set; }
@@ -30,5 +25,11 @@ namespace LearningCompany.Entities
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<DemandeClient> DemandesClients { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // ON DELETE NO ACTION ON UPDATE NO ACTION
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 }
