@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ActivitesCommerciales\DemandeClient.cs" />
     <Compile Include="DAL\LearningCompanyContext.cs" />
+    <Compile Include="DAL\LearningCompanyInitializer.cs" />
     <Compile Include="DoneesReferencielles\Civilite.cs" />
     <Compile Include="DoneesReferencielles\SecteurActivite.cs" />
     <Compile Include="DoneesReferencielles\Theme.cs" />
