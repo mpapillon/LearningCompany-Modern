@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LearningCompany.Entities
 {
+    [Table("Commerciaux")]
     public class Commercial
     {
         #region Attributes
