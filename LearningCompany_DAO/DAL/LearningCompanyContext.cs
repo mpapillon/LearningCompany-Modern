@@ -14,8 +14,6 @@ namespace LearningCompany.Entities
         public DbSet<Stagiaire> Stagiaires { get; set; }
 
         public DbSet<Formation> Formations { get; set; }
-        public DbSet<FormationElearning> FormationsElearning { get; set; }
-        public DbSet<FormationPresentielle> FormationsPresentielles { get; set; }
         public DbSet<SessionFormation> SessionsFormations { get; set; }
 
         public DbSet<Civilite> Civilites { get; set; }
@@ -30,6 +28,9 @@ namespace LearningCompany.Entities
         {
             // ON DELETE NO ACTION ON UPDATE NO ACTION
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            // On créer une table pour les deux Entitées qui héritent de Formation
+            modelBuilder.Entity<FormationPresentielle>().ToTable("FormationsPresentielles");
+            modelBuilder.Entity<FormationElearning>().ToTable("FormationsElearning");
         }
     }
 }

@@ -1,0 +1,63 @@
+﻿@model LearningCompany.Entities.Commercial
+
+@{
+    ViewBag.Title = "Mon compte";
+}
+
+<h2>Mon Compte</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.CommercialID)
+
+    <div class="row">
+        <div class="large-2 columns">
+            @Html.LabelFor(model => model.CiviliteID)
+            @Html.DropDownList("CiviliteID", String.Empty)
+            @Html.ValidationMessageFor(model => model.CiviliteID)
+        </div>
+        <div class="large-5 columns">
+            @Html.LabelFor(model => model.Nom)
+            @Html.EditorFor(model => model.Nom)
+            @Html.ValidationMessageFor(model => model.Nom)
+        </div>
+        <div class="large-5 columns">
+            @Html.LabelFor(model => model.Prenom)
+            @Html.EditorFor(model => model.Prenom)
+            @Html.ValidationMessageFor(model => model.Prenom)
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="large-6 columns">
+            @Html.LabelFor(model => model.NomUtilisateur)
+            @Html.EditorFor(model => model.NomUtilisateur)
+            @Html.ValidationMessageFor(model => model.NomUtilisateur)
+        </div>
+        <div class="large-6 columns">
+            @Html.LabelFor(model => model.MotDePasse)
+            @Html.EditorFor(model => model.MotDePasse)
+            @Html.ValidationMessageFor(model => model.MotDePasse)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns">
+            @Html.LabelFor(model => model.Courriel)
+            @Html.EditorFor(model => model.Courriel)
+            @Html.ValidationMessageFor(model => model.Courriel)
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <input type="submit" class="button success tiny radius right" value="Mettre à jour" />
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -148,7 +148,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommercialController.cs" />
+    <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +216,18 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Commercial\Edit.cshtml" />
+    <Content Include="Views\Formation\CreateElearning.cshtml" />
+    <Content Include="Views\Formation\Delete.cshtml" />
+    <Content Include="Views\Formation\Details.cshtml" />
+    <Content Include="Views\Formation\Edit.cshtml" />
+    <Content Include="Views\Formation\Index.cshtml" />
+    <Content Include="Views\Theme\Create.cshtml" />
+    <Content Include="Views\Theme\Delete.cshtml" />
+    <Content Include="Views\Theme\Details.cshtml" />
+    <Content Include="Views\Theme\Edit.cshtml" />
+    <Content Include="Views\Theme\Index.cshtml" />
+    <Content Include="Views\Theme\_Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LearningCompany_DAO\LearningCompany_DAO.csproj">

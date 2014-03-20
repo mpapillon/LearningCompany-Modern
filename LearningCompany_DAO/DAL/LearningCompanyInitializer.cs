@@ -122,7 +122,7 @@ namespace LearningCompany.Entities
             stagiaires.ForEach(sta => context.Stagiaires.Add(sta));
             context.SaveChanges();
 
-            var formationsP = new List<FormationPresentielle>
+            var formations = new List<Formation>
             {
                 new FormationPresentielle { Reference = "B21-005", Libelle = "Découvrir les nouveautés de Microsoft Word 2010", NombreJours = 3, Prix = 850.0M, Decription = "Permet d''étudier les principales fonctionnalités de Microsoft Word", Theme = themes[0], Lieu = "Avenue de la République, Salle 1 - PARIS"},
                 new FormationPresentielle { Reference = "B03-011", Libelle = "Excel 2010", NombreJours = 3, Prix = 800.0M, Decription = "Permet de réaliser des classeurs Excel avancés avec Excel 2010", Theme = themes[0], Lieu = "Avenue de la République, Salle 2 - PARIS" },
@@ -134,26 +134,6 @@ namespace LearningCompany.Entities
                 new FormationPresentielle { Reference = "T23-012", Libelle = "Le médecin généraliste", NombreJours = 2, Prix = 2300.0M, Decription = "Psychologie du médecin généraliste en milieu rural", Theme = themes[8], Lieu = "Avenue de la République, Salle 1 - PARIS" },
                 new FormationPresentielle { Reference = "D12-090", Libelle = "Le dédecin spécialiste", NombreJours = 2, Prix = 2300.0M, Decription = "Psychologie du médecin spécialiste en milieu libéral", Theme = themes[8], Lieu = "Avenue de la République, Salle 4 - PARIS" },
                 new FormationPresentielle { Reference = "D12-091", Libelle = "Le dédecin spécialiste", NombreJours = 2, Prix = 2300.0M, Decription = "Psychologie du médecin spécialiste hospitalier", Theme = themes[8], Lieu = "Avenue de la République, Salle 5 - PARIS" },
-            };
-
-            //formationsP[0].Formateurs.Add(formateurs[5]); //1
-            //formationsP[0].Formateurs.Add(formateurs[6]);
-
-            //formationsP[1].Formateurs.Add(formateurs[5]); //2
-            //formationsP[1].Formateurs.Add(formateurs[6]);
-
-            //formationsP[2].Formateurs.Add(formateurs[5]); //3
-            //formationsP[2].Formateurs.Add(formateurs[6]);
-            //formationsP[2].Formateurs.Add(formateurs[11]);
-
-            //formationsP[3].Formateurs.Add(formateurs[5]); //4
-            //formationsP[3].Formateurs.Add(formateurs[6]);
-            //formationsP[3].Formateurs.Add(formateurs[11]);
-
-            formationsP.ForEach(f => context.FormationsPresentielles.Add(f));
-
-            var formationsEl = new List<FormationElearning>
-            {
                 new FormationElearning { Reference = "T02-055", Libelle = "Les statines", NombreJours = 2, Prix = 1000.0M, Decription = "Les statines de nouvelles générations pour le traitement du cholestérol", Theme = themes[7], Url = "http://www.learningcompany.fr/1.htm" },
                 new FormationElearning { Reference = "T04-025", Libelle = "Les antibiotiques", NombreJours = 3, Prix = 1400.0M, Decription = "Les antibiotiques de la catégorie Macrolid", Theme = themes[7], Url = "http://www.learningcompany.fr/2.htm" },
                 new FormationElearning { Reference = "T02-059", Libelle = "Réglementation nationale", NombreJours = 2, Prix = 899.0M, Decription = "Les nouveaux réglements Agence Nationale de Sécurité du Médicament (ANSM)", Theme = themes[8], Url = "http://www.learningcompany.fr/3.htm" },
@@ -165,26 +145,7 @@ namespace LearningCompany.Entities
                 new FormationElearning { Reference = "T15-040", Libelle = "Interactions médicamenteuses", NombreJours = 1, Prix = 500.0M, Decription = "Interactions médicamenteuses chez les personnes agées", Theme = themes[6], Url = "http://www.learningcompany.fr/9.htm" },
             };
 
-            //formationsEl[0].Formateurs.Add(formateurs[1]); //5
-            //formationsEl[0].Formateurs.Add(formateurs[2]);
-            //formationsEl[0].Formateurs.Add(formateurs[14]);
-
-            //formationsEl[1].Formateurs.Add(formateurs[1]); //6
-            //formationsEl[1].Formateurs.Add(formateurs[2]);
-            //formationsEl[1].Formateurs.Add(formateurs[14]);
-
-            //formationsEl[2].Formateurs.Add(formateurs[9]); //7
-            //formationsEl[2].Formateurs.Add(formateurs[12]);
-
-            //formationsEl[3].Formateurs.Add(formateurs[7]); //8
-
-            //formationsEl[4].Formateurs.Add(formateurs[7]); //9
-            //formationsEl[4].Formateurs.Add(formateurs[8]);
-
-            //formationsEl[5].Formateurs.Add(formateurs[5]); //10
-            //formationsEl[5].Formateurs.Add(formateurs[6]);
-
-            formationsEl.ForEach(f => context.FormationsElearning.Add(f));
+            formations.ForEach(f => context.Formations.Add(f));
             context.SaveChanges();
         }
     }
