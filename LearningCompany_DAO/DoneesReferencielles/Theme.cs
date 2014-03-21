@@ -13,5 +13,7 @@ namespace LearningCompany.Entities
 
         [MaxLength(50), Required]
         public string Libelle { get; set; }
+
+        public virtual ICollection<Formation> Formations { get; set; }
     }
 }

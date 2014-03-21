@@ -30,8 +30,8 @@
                     <a href="#">Gestion des formations</a>
                     <ul class="dropdown">
                         <li><label>Formations</label></li>
-                        <li>@Html.ActionLink("Créer une Formation présentielle", "CreatePresentielle", "Formation")</li>
-                        <li>@Html.ActionLink("Créer une Formation elearning", "CreateElearning", "Formation")</li>
+                        <li>@Html.ActionLink("Créer une formation présentielle", "Create", "Formation", new { type = "presentielle" }, null)</li>
+                        <li>@Html.ActionLink("Créer une formation elearning", "Create", "Formation", new { type = "elearning" }, null)</li>
                         <li class="divider"></li>
                         <li><label>Sessions de formations</label></li>
                         <li>@Html.ActionLink("Créer une Session de formation", "Create", "SessionFormation")</li>

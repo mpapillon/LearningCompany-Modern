@@ -12,13 +12,19 @@ namespace LearningCompany.Controllers
 {
     public class FormationController : Controller
     {
-        private LearningCompanyContext db = new LearningCompanyContext();
+        private LearningCompanyContext _db = new LearningCompanyContext();
 
         // GET: /Formation/
-        public ActionResult Index()
+        public ActionResult Index(int? theme)
         {
-            var formations = db.Formations.Include(f => f.Theme);
-            return View(formations.ToList());
+            if (theme.HasValue)
+            {
+                return View(_db.Themes.Find(theme).Formations);
+            }
+            else
+            {
+                return View(_db.Formations.Include(f => f.Theme));
+            }
         }
 
         // GET: /Formation/Details/5
@@ -28,7 +34,7 @@ namespace LearningCompany.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Formation formation = db.Formations.Find(id);
+            Formation formation = _db.Formations.Find(id);
             if (formation == null)
             {
                 return HttpNotFound();
@@ -36,95 +42,102 @@ namespace LearningCompany.Controllers
             return View(formation);
         }
 
-        // GET: /Formation/CreateElearning
-        public ActionResult CreateElearning()
+        // GET: /Formation/Create
+        [Authorize]
+        public ActionResult Create(string type)
         {
-            ViewBag.ThemeID = new SelectList(db.Themes, "ThemeID", "Libelle");
-            return View();
+            ViewBag.ThemeID = new SelectList(_db.Themes, "ThemeID", "Libelle");
+
+            switch (type)
+            {
+                case "presentielle":
+                    return View("CreatePresentielle");
+
+                case "elearning":
+                    return View("CreateElearning");
+
+                default:
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
-        // POST: /Formation/CreateElearning
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        // POST: /Formation/Create
+        [HttpPost, Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateElearning([Bind(Include="FormationID,Reference,Libelle,NombreJours,Prix,Decription, Url,ThemeID")] FormationElearning formation)
+        public ActionResult Create(string type, [Bind(Include="FormationID,Reference,Libelle,NombreJours,Prix,Description,ThemeID")] Formation formation, FormCollection form)
         {
-            if (ModelState.IsValid)
+            ViewBag.ThemeID = new SelectList(_db.Themes, "ThemeID", "Libelle", formation.ThemeID);
+
+            switch (type)
             {
-                db.Formations.Add(formation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                case "presentielle":
+                    FormationPresentielle formationP = new FormationPresentielle(formation);
+                    formationP.Lieu = form["Lieu"];
+                    if (ModelState.IsValid)
+                    {
+                        _db.Formations.Add(formationP);
+                        _db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    return View("CreatePresentielle", formationP);
+
+                case "elearning":
+                    FormationElearning formationE = new FormationElearning(formation);
+                    formationE.Url = form["Url"];
+                    if (ModelState.IsValid)
+                    {
+                        _db.Formations.Add(formationE);
+                        _db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    return View("CreateElearning", formationE);
+
+                default:
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ViewBag.ThemeID = new SelectList(db.Themes, "ThemeID", "Libelle", formation.ThemeID);
-            return View(formation);
+            //return View(formation);
         }
 
         // GET: /Formation/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Formation formation = db.Formations.Find(id);
+            Formation formation = _db.Formations.Find(id);
             if (formation == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ThemeID = new SelectList(db.Themes, "ThemeID", "Libelle", formation.ThemeID);
+            ViewBag.ThemeID = new SelectList(_db.Themes, "ThemeID", "Libelle", formation.ThemeID);
             return View(formation);
         }
 
         // POST: /Formation/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="FormationID,Reference,Libelle,NombreJours,Prix,Decription,ThemeID")] Formation formation)
+        public ActionResult Edit([Bind(Include="FormationID,Reference,Libelle,NombreJours,Prix,Description,ThemeID")] Formation formation)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(formation).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(formation).State = System.Data.Entity.EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ThemeID = new SelectList(db.Themes, "ThemeID", "Libelle", formation.ThemeID);
+            ViewBag.ThemeID = new SelectList(_db.Themes, "ThemeID", "Libelle", formation.ThemeID);
             return View(formation);
-        }
-
-        // GET: /Formation/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Formation formation = db.Formations.Find(id);
-            if (formation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(formation);
-        }
-
-        // POST: /Formation/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Formation formation = db.Formations.Find(id);
-            db.Formations.Remove(formation);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -9,29 +9,37 @@ namespace LearningCompany.Entities
 {
     public class Formation
     {
+        #region Attributes
         public int FormationID { get; set; }
 
         [MaxLength(50), Required]
+        [Display(Name = "Référence")]
         public string Reference { get; set; }
 
         [MaxLength(50), Required]
+        [Display(Name = "Libellé")]
         public string Libelle { get; set; }
 
         [Required]
+        [Display(Name = "Durée")]
         public Int16 NombreJours { get; set; }
 
         [Required]
+        [Display(Name = "Prix (en €)")]
         public Decimal Prix { get; set; }
 
         [Required]
-        public string Decription { get; set; }
+        [Display(Name = "Description")]
+        public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Thème")]
         public int ThemeID { get; set; }
         public virtual Theme Theme { get; set; }
 
         public virtual ICollection<SessionFormation> SessionsFormations { get; set; }
         public virtual ICollection<Formateur> Formateurs { get; set; }
         public virtual ICollection<DemandeClient> DemandesClients { get; set; }
+        #endregion
     }
 }

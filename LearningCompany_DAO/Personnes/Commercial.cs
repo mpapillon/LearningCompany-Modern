@@ -15,22 +15,28 @@ namespace LearningCompany.Entities
         public int CommercialID { get; set; }
 
         [MaxLength(50), Required]
+        [Display(Name = "Nom d'utilisateur")]
         public string NomUtilisateur { get; set; }
 
         [MaxLength(50), Required]
+        [Display(Name = "Mot de passe")]
         public string MotDePasse { get; set; }
 
         [MaxLength(50), Required]
+        [Display(Name = "Nom")]
         public string Nom { get; set; }
 
         [MaxLength(50), Required]
+        [Display(Name = "Prénom")]
         public string Prenom { get; set; }
 
         [MaxLength(50), Required]
         [Index(IsUnique = true)]
+        [Display(Name = "Courriel")]
         public string Courriel { get; set; }
 
         [Required]
+        [Display(Name = "Civilité")]
         public int CiviliteID { get; set; }
         public virtual Civilite Civilite { get; set; }
 
@@ -40,7 +46,7 @@ namespace LearningCompany.Entities
 
         #region Methodes
 
-        public static Commercial GetByAuthentication(string aUsername, string aPassword)
+        public static Commercial FindByAuthentication(string aUsername, string aPassword)
         {
             using(var db = new LearningCompanyContext())
             {
@@ -48,6 +54,28 @@ namespace LearningCompany.Entities
                         where oCommcecial.NomUtilisateur == aUsername
                         && oCommcecial.MotDePasse == aPassword
                         select oCommcecial).FirstOrDefault();
+            }
+        }
+
+        public int GetNombreDemandesClientsEnAttente()
+        {
+            using (var db = new LearningCompanyContext())
+            {
+                return (from oDemandeClient in db.DemandesClients
+                        where oDemandeClient.Client.Commercial.CommercialID == this.CommercialID
+                            && oDemandeClient.DateTraitement == null
+                        select oDemandeClient).Count();
+            }
+        }
+
+        public List<DemandeClient> GetListeDemandesClientsEnAttente()
+        {
+            using (var db = new LearningCompanyContext())
+            {
+                return (from oDemandeClient in db.DemandesClients
+                        where oDemandeClient.Client.Commercial.CommercialID == this.CommercialID
+                            && oDemandeClient.DateTraitement == null
+                        select oDemandeClient).ToList();
             }
         }
 

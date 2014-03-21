@@ -12,7 +12,7 @@ namespace LearningCompany.Security
         
         public override bool ValidateUser(string username, string password)
         {
-            return Commercial.GetByAuthentication(username, password) != null;
+            return Commercial.FindByAuthentication(username, password) != null;
         }
 
         #region Not used

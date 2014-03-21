@@ -1,1 +1,6 @@
-﻿
+﻿@model IEnumerable<LearningCompany.Entities.Theme>
+
+@foreach (var t in Model)
+{
+    <li>@Html.ActionLink(t.Libelle, "Index", "Formation", new { theme = t.ThemeID }, null)</li>
+}

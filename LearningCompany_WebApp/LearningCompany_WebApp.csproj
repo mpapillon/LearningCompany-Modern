@@ -222,12 +222,8 @@
     <Content Include="Views\Formation\Details.cshtml" />
     <Content Include="Views\Formation\Edit.cshtml" />
     <Content Include="Views\Formation\Index.cshtml" />
-    <Content Include="Views\Theme\Create.cshtml" />
-    <Content Include="Views\Theme\Delete.cshtml" />
-    <Content Include="Views\Theme\Details.cshtml" />
-    <Content Include="Views\Theme\Edit.cshtml" />
-    <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\Theme\_Navigation.cshtml" />
+    <Content Include="Views\Formation\CreatePresentielle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LearningCompany_DAO\LearningCompany_DAO.csproj">

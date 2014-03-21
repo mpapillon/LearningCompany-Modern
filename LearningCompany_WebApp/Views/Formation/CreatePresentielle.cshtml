@@ -1,10 +1,10 @@
-﻿@model LearningCompany.Entities.FormationElearning
+﻿@model LearningCompany.Entities.FormationPresentielle
 
 @{
     ViewBag.Title = "Nouvelle formation";
 }
 
-<h4>Créer une formation Elearning</h4>
+<h4>Créer une formation présentielle</h4>
 <hr />
 
 
@@ -55,9 +55,9 @@
     
     <div class="row">
         <div class="large-12 columns">
-            @Html.LabelFor(model => model.Url)
-            @Html.EditorFor(model => model.Url)
-            @Html.ValidationMessageFor(model => model.Url)
+            @Html.LabelFor(model => model.Lieu)
+            @Html.EditorFor(model => model.Lieu)
+            @Html.ValidationMessageFor(model => model.Lieu)
         </div>
     </div>
 
