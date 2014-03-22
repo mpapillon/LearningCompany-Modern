@@ -39,5 +39,10 @@ namespace LearningCompany.Entities
 
         public virtual ICollection<SessionFormation> SessionsFormations { get; set; }
         public virtual ICollection<Formation> Formations { get; set; }
+
+        public string NomComplet
+        {
+            get { return Nom + " " + Prenom; }
+        }
     }
 }

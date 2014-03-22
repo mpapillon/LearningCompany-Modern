@@ -30,24 +30,7 @@ namespace LearningCompany.Services
             config.SetEntitySetAccessRule("Clients", EntitySetRights.AllRead);
             config.SetEntitySetAccessRule("Stagiaires", EntitySetRights.AllRead);
 
-            config.SetServiceOperationAccessRule("GetFormateurByName", ServiceOperationRights.AllRead);
-
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
-        }
-
-        [WebGet]
-        public Formateur GetFormateurByName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("city",
-                    "You must provide a value for the parameter'city'.");
-            }
-
-            var db = new LearningCompanyContext();
-
-            var formateur = db.Formateurs.FirstOrDefault(f => f.Nom == name);
-            return formateur;
         }
     }
 }

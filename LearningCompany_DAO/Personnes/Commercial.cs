@@ -42,6 +42,13 @@ namespace LearningCompany.Entities
 
         public virtual ICollection<Client> Clients { get; set; }
         public virtual ICollection<SessionFormation> SessionsFormations { get; set; }
+
+
+        public string NomComplet
+        {
+            get { return Nom + " " + Prenom; }   
+        }
+        
         #endregion
 
         #region Methodes
