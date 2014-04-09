@@ -14,7 +14,7 @@ namespace LearningCompany_WP.ViewModels
         // To make updates and save changes, replace this URI 
         // with your own Northwind service implementation.
         private static readonly Uri _rootUri =
-            new Uri("http://192.168.1.12/Services/AccesCommerciaux.svc/");
+            new Uri("http://192.168.1.10:24609/Services/AccesCommerciaux.svc/");
 
         // Define the typed DataServiceContext.
         private LearningCompanyContext _context;

@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningCompany_WebApp", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningCompany_WP", "LearningCompany_WP\LearningCompany_WP.csproj", "{C27BD263-A376-4E6F-BAA6-E6336C4E571F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningCompany_Tests", "LearningCompany_Tests\LearningCompany_Tests.csproj", "{56682B62-5222-4BA9-A1E6-E52386CB4946}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://maxencepapillon.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -24,6 +26,9 @@ Global
 		SccProjectUniqueName3 = LearningCompany_WP\\LearningCompany_WP.csproj
 		SccProjectName3 = LearningCompany_WP
 		SccLocalPath3 = LearningCompany_WP
+		SccProjectUniqueName4 = LearningCompany_Tests\\LearningCompany_Tests.csproj
+		SccProjectName4 = LearningCompany_Tests
+		SccLocalPath4 = LearningCompany_Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +73,14 @@ Global
 		{C27BD263-A376-4E6F-BAA6-E6336C4E571F}.Release|x86.ActiveCfg = Release|x86
 		{C27BD263-A376-4E6F-BAA6-E6336C4E571F}.Release|x86.Build.0 = Release|x86
 		{C27BD263-A376-4E6F-BAA6-E6336C4E571F}.Release|x86.Deploy.0 = Release|x86
+		{56682B62-5222-4BA9-A1E6-E52386CB4946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56682B62-5222-4BA9-A1E6-E52386CB4946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56682B62-5222-4BA9-A1E6-E52386CB4946}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{56682B62-5222-4BA9-A1E6-E52386CB4946}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{56682B62-5222-4BA9-A1E6-E52386CB4946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56682B62-5222-4BA9-A1E6-E52386CB4946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56682B62-5222-4BA9-A1E6-E52386CB4946}.Release|ARM.ActiveCfg = Release|Any CPU
+		{56682B62-5222-4BA9-A1E6-E52386CB4946}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

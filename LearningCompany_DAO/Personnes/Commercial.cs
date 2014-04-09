@@ -53,6 +53,19 @@ namespace LearningCompany.Entities
 
         #region Methodes
 
+        public Commercial() { }
+
+        public Commercial(string unNom, string unPrenom, string unNomUtilisateur, 
+            string unMotDePasse, string unCourriel, Civilite uneCivilite)
+        {
+            this.Nom = unNom;
+            this.Prenom = unPrenom;
+            this.NomUtilisateur = unNomUtilisateur;
+            this.MotDePasse = unMotDePasse;
+            this.Courriel = unCourriel;
+            this.Civilite = uneCivilite;
+        }
+
         public static Commercial FindByAuthentication(string aUsername, string aPassword)
         {
             using(var db = new LearningCompanyContext())

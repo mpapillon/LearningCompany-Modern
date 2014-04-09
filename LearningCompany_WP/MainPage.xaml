@@ -8,10 +8,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    Foreground="White"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False"
     toolkit:TiltEffect.IsTiltEnabled="True">
@@ -39,7 +38,13 @@
          -->
 
          <!--Contrôle Panorama-->
-        <phone:Panorama Title="LearningCompany">
+        <phone:Panorama Title="LearningCompany" Foreground="White">
+            <phone:Panorama.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF21586C" Offset="0.011"/>
+                    <GradientStop Color="#FF76B1C7" Offset="1"/>
+                </LinearGradientBrush>
+            </phone:Panorama.Background>
 
             <phone:PanoramaItem>
                 <!--Liste double trait avec espace réservé pour une image et habillage du texte utilisant un en-tête flottant qui défile avec le contenu-->
@@ -53,7 +58,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Formateurs"
                                            Style="{StaticResource PanoramaItemHeaderTextStyle}"
-                                           Grid.Row="0"/>
+                                           Grid.Row="0" Foreground="White"/>
                             </Grid>
                         </DataTemplate>
                     </phone:LongListSelector.ListHeaderTemplate>
@@ -61,9 +66,13 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
                                 <!--Remplacer le rectangle par l'image-->
-                                <Border BorderThickness="1" Width="99" Height="99" Background="{StaticResource PhoneAccentBrush}"/>
+                                <Border BorderThickness="1" Width="99" Height="99">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="#FF135EA8"/>
+                                    </Border.Background>
+                                </Border>
                                 <StackPanel Width="311" Margin="8,-7,0,0">
-                                    <TextBlock Text="{Binding NomComplet}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                    <TextBlock Text="{Binding NomComplet}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
                                     <TextBlock Text="{Binding Courriel}" TextWrapping="Wrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                 </StackPanel>
                             </StackPanel>
@@ -79,7 +88,7 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,-6,0,12">
-                                <TextBlock Text="{Binding Reference}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                <TextBlock Text="{Binding Reference}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Foreground="White"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -92,7 +101,7 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,-6,0,12">
-                                <TextBlock Text="{Binding NomComplet}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                                <TextBlock Text="{Binding NomComplet}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Foreground="White"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
