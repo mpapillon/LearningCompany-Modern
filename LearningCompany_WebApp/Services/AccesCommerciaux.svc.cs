@@ -25,7 +25,6 @@ namespace LearningCompany.Services
             // config.SetEntitySetAccessRule("MyEntityset", EntitySetRights.AllRead);
             // config.SetServiceOperationAccessRule("MyServiceOperation", ServiceOperationRights.All);
 
-            config.SetEntitySetAccessRule("Civilites", EntitySetRights.AllRead);
             config.SetEntitySetAccessRule("Formateurs", EntitySetRights.AllRead);
             config.SetEntitySetAccessRule("Clients", EntitySetRights.AllRead);
             config.SetEntitySetAccessRule("Stagiaires", EntitySetRights.AllRead);
