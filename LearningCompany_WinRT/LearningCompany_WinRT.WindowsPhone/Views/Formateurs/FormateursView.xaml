@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="LearningCompany_WinRT.Views.Formateurs.FormateursView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LearningCompany_WinRT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="FormateursListView">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Rectangle Height="85" Width="85" Margin="0,0,15,0">
+                    <Rectangle.Fill>
+                        <ImageBrush Stretch="Fill" ImageSource="ms-appx:///SampleData/Portrait.jpg"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <StackPanel>
+                    <TextBlock Text="{Binding NomComplet}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Courriel}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <d:DesignProperties.DataContext>
+        <design:FormateursSample xmlns:design="using:LearningCompany_WinRT.SampleData" />
+    </d:DesignProperties.DataContext>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <!--<AppBarButton Icon="Add" Label="Ajouter"/>-->
+            <AppBarButton x:Name="Refresh_btn" Icon="Sync" Label="Actualiser" Click="Refresh_btn_Click" />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TitlePanel -->
+        <StackPanel Grid.Row="0" Margin="24,17,0,6">
+            <TextBlock Text="Formateurs" Style="{ThemeResource TitleTextBlockStyle}" Typography.Capitals="SmallCaps"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Pivot Grid.Row="1" x:Name="ContentRoot">
+            <PivotItem Header="internes" Margin="19,23,0,0">
+                <ListView x:Name="Formateurs_Internes" 
+                          ItemsSource="{Binding FormateursInternes}" 
+                          ItemTemplate="{StaticResource FormateursListView}" 
+                          SelectionChanged="Formateurs_Internes_SelectionChanged"/>
+            </PivotItem>
+            <PivotItem Header="externes" Margin="19,23,0,0">
+                <ListView x:Name="Formateurs_Externes" 
+                          ItemsSource="{Binding FormateursExternes}" 
+                          ItemTemplate="{StaticResource FormateursListView}" 
+                          SelectionChanged="Formateurs_Externes_SelectionChanged"/>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

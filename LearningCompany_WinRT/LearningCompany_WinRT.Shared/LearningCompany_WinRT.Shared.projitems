@@ -26,19 +26,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Client.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Formateur.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Stagiaire.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Civilite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Formateur.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Stagiaire.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SampleData\FormateursSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\LearningCompanyApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FormateursViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Common\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)SampleData\MainViewModelSampleData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Content Include="$(MSBuildThisFileDirectory)SampleData\Portrait.jpg" />
   </ItemGroup>
 </Project>

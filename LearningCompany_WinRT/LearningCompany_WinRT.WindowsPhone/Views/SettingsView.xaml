@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="LearningCompany_WinRT.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LearningCompany_WinRT.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TitlePanel -->
+        <StackPanel Grid.Row="0" Margin="24,17,0,28">
+            <TextBlock Text="{StaticResource AppName}" Style="{ThemeResource TitleTextBlockStyle}" Typography.Capitals="SmallCaps"/>
+            <TextBlock Text="Paramètres" Margin="0,12,0,0" Style="{ThemeResource HeaderTextBlockStyle}"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot">
+            <StackPanel Margin="17,0">
+                <TextBox x:Name="apiUrl_tbx" Header="Adresse du service web" InputScope="Url" TextChanged="apiUrl_tbx_TextChanged"/>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}">Si une adresse est indiqué, l'application n'utilisera plus le service web par défaut mais celui que vous avez spécifié ici.</TextBlock>
+                <Button Content="Vide le cache de l'application" HorizontalAlignment="Stretch" Margin="0,10,0,0"/>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}">Vous pouvez vider le cache en cas de problème de données ou pour libérer de l'espace disque.</TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

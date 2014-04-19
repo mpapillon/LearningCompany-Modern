@@ -10,10 +10,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Page.Resources>
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
-    </Page.Resources>
+    <d:DesignProperties.DataContext>
+        <design:FormateursSample xmlns:design="using:LearningCompany_WinRT.SampleData" />
+    </d:DesignProperties.DataContext>
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -46,5 +45,7 @@
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
+        <GridView Grid.Row="1">
+        </GridView>
     </Grid>
 </Page>
