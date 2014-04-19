@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="LearningCompany_WinRT.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LearningCompany_WinRT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="Settings_btn" Label="Paramètres" Click="Settings_btn_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TitlePanel -->
+        <StackPanel Grid.Row="0" Margin="24,17,0,28">
+            <TextBlock Text="{StaticResource AppName}" Style="{ThemeResource TitleTextBlockStyle}" Typography.Capitals="SmallCaps"/>
+            <TextBlock Text="Bienvenue" Margin="0,12,0,0" Style="{ThemeResource HeaderTextBlockStyle}"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot">
+            <ListView x:Name="Menu" Margin="24,0,0,0" SelectionChanged="Menu_SelectionChanged">
+                <StackPanel Margin="0,0,0,10" Orientation="Horizontal" >
+                    <Grid Width="85" Height="85" Margin="0,0,20,0">
+                        <Rectangle Fill="{ ThemeResource PhoneAccentBrush}" />
+                        <Path Margin="10" Stretch="Uniform" UseLayoutRounding="False" Fill="{ ThemeResource PhoneButtonBasePressedForegroundBrush }" Data="F1 M 0,16.785L 0,2.41499C 0,1.77504 0.235016,1.21254 0.705002,0.727493C 1.17502,0.242508 1.745,1.52588e-005 2.41501,1.52588e-005L 21.6075,1.52588e-005C 22.2475,1.52588e-005 22.8063,0.242508 23.2838,0.727493C 23.7612,1.21254 24,1.77504 24,2.41499L 24,16.785C 24,17.46 23.7612,18.0313 23.2838,18.4988C 22.8063,18.9663 22.2475,19.2 21.6075,19.2L 2.41501,19.2C 1.745,19.2 1.17502,18.9663 0.705002,18.4988C 0.235016,18.0313 0,17.46 0,16.785 Z M 2.40001,16.8L 21.6,16.8L 21.6,2.40004L 2.40001,2.40004L 2.40001,16.8 Z M 4.8,14.4L 4.8,12L 10.56,12L 10.56,14.4L 4.8,14.4 Z M 4.8,10.56L 4.8,8.16005L 10.56,8.16005L 10.56,10.56L 4.8,10.56 Z M 4.8,7.20003L 4.8,4.8L 10.56,4.8L 10.56,7.20003L 4.8,7.20003 Z M 13.44,14.4C 13.44,13.44 13.355,12.96 13.185,12.96C 14.635,12.45 15.36,11.7575 15.36,10.8825C 15.36,10.6375 15.12,10.2025 14.64,9.57753C 14.16,8.95253 13.92,8.26503 13.92,7.51503C 13.92,5.705 14.6375,4.8 16.0725,4.8C 16.8725,4.8 17.4338,5.02376 17.7562,5.47127C 18.0788,5.91878 18.24,6.60002 18.24,7.51503C 18.24,8.26503 18,8.95253 17.52,9.57753C 17.04,10.2025 16.8,10.6375 16.8,10.8825C 16.8,11.2475 16.9812,11.6138 17.3438,11.9813C 17.7063,12.3488 18.0625,12.615 18.4125,12.78L 18.9675,12.96L 19.2,14.4L 13.44,14.4 Z "/>
+                    </Grid>
+                    <StackPanel>
+                        <TextBlock Style="{ StaticResource ListViewItemTextBlockStyle}">Formateurs</TextBlock>
+                        <TextBlock Style="{ StaticResource ListViewItemSubheaderTextBlockStyle}">Gestion des formateurs</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,10" Orientation="Horizontal" >
+                    <Grid Width="85" Height="85" Margin="0,0,20,0">
+                        <Rectangle Fill="{ ThemeResource PhoneAccentBrush}" />
+                        <Path Margin="10" Stretch="Uniform" UseLayoutRounding="False" Fill="{ ThemeResource PhoneButtonBasePressedForegroundBrush }" Data="F1 M 0,16.785L 0,2.41499C 0,1.77504 0.235016,1.21254 0.705002,0.727493C 1.17502,0.242508 1.745,1.52588e-005 2.41501,1.52588e-005L 21.6075,1.52588e-005C 22.2475,1.52588e-005 22.8063,0.242508 23.2838,0.727493C 23.7612,1.21254 24,1.77504 24,2.41499L 24,16.785C 24,17.46 23.7612,18.0313 23.2838,18.4988C 22.8063,18.9663 22.2475,19.2 21.6075,19.2L 2.41501,19.2C 1.745,19.2 1.17502,18.9663 0.705002,18.4988C 0.235016,18.0313 0,17.46 0,16.785 Z M 2.40001,16.8L 21.6,16.8L 21.6,2.40004L 2.40001,2.40004L 2.40001,16.8 Z M 4.8,14.4L 4.8,12L 10.56,12L 10.56,14.4L 4.8,14.4 Z M 4.8,10.56L 4.8,8.16005L 10.56,8.16005L 10.56,10.56L 4.8,10.56 Z M 4.8,7.20003L 4.8,4.8L 10.56,4.8L 10.56,7.20003L 4.8,7.20003 Z M 13.44,14.4C 13.44,13.44 13.355,12.96 13.185,12.96C 14.635,12.45 15.36,11.7575 15.36,10.8825C 15.36,10.6375 15.12,10.2025 14.64,9.57753C 14.16,8.95253 13.92,8.26503 13.92,7.51503C 13.92,5.705 14.6375,4.8 16.0725,4.8C 16.8725,4.8 17.4338,5.02376 17.7562,5.47127C 18.0788,5.91878 18.24,6.60002 18.24,7.51503C 18.24,8.26503 18,8.95253 17.52,9.57753C 17.04,10.2025 16.8,10.6375 16.8,10.8825C 16.8,11.2475 16.9812,11.6138 17.3438,11.9813C 17.7063,12.3488 18.0625,12.615 18.4125,12.78L 18.9675,12.96L 19.2,14.4L 13.44,14.4 Z "/>
+                    </Grid>
+                    <StackPanel>
+                        <TextBlock Style="{ StaticResource ListViewItemTextBlockStyle}">Stagiaires</TextBlock>
+                        <TextBlock Style="{ StaticResource ListViewItemSubheaderTextBlockStyle}">Gestion des stagiares</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,10" Orientation="Horizontal" >
+                    <Grid Width="85" Height="85" Margin="0,0,20,0">
+                        <Rectangle Fill="{ ThemeResource PhoneAccentBrush}" />
+                        <Path Margin="10" Stretch="Uniform" UseLayoutRounding="False" Fill="{ ThemeResource PhoneButtonBasePressedForegroundBrush }" Data="F1 M 0,16.785L 0,2.41499C 0,1.77504 0.235016,1.21254 0.705002,0.727493C 1.17502,0.242508 1.745,1.52588e-005 2.41501,1.52588e-005L 21.6075,1.52588e-005C 22.2475,1.52588e-005 22.8063,0.242508 23.2838,0.727493C 23.7612,1.21254 24,1.77504 24,2.41499L 24,16.785C 24,17.46 23.7612,18.0313 23.2838,18.4988C 22.8063,18.9663 22.2475,19.2 21.6075,19.2L 2.41501,19.2C 1.745,19.2 1.17502,18.9663 0.705002,18.4988C 0.235016,18.0313 0,17.46 0,16.785 Z M 2.40001,16.8L 21.6,16.8L 21.6,2.40004L 2.40001,2.40004L 2.40001,16.8 Z M 4.8,14.4L 4.8,12L 10.56,12L 10.56,14.4L 4.8,14.4 Z M 4.8,10.56L 4.8,8.16005L 10.56,8.16005L 10.56,10.56L 4.8,10.56 Z M 4.8,7.20003L 4.8,4.8L 10.56,4.8L 10.56,7.20003L 4.8,7.20003 Z M 13.44,14.4C 13.44,13.44 13.355,12.96 13.185,12.96C 14.635,12.45 15.36,11.7575 15.36,10.8825C 15.36,10.6375 15.12,10.2025 14.64,9.57753C 14.16,8.95253 13.92,8.26503 13.92,7.51503C 13.92,5.705 14.6375,4.8 16.0725,4.8C 16.8725,4.8 17.4338,5.02376 17.7562,5.47127C 18.0788,5.91878 18.24,6.60002 18.24,7.51503C 18.24,8.26503 18,8.95253 17.52,9.57753C 17.04,10.2025 16.8,10.6375 16.8,10.8825C 16.8,11.2475 16.9812,11.6138 17.3438,11.9813C 17.7063,12.3488 18.0625,12.615 18.4125,12.78L 18.9675,12.96L 19.2,14.4L 13.44,14.4 Z "/>
+                    </Grid>
+                    <StackPanel>
+                        <TextBlock Style="{ StaticResource ListViewItemTextBlockStyle}">Clients</TextBlock>
+                        <TextBlock Style="{ StaticResource ListViewItemSubheaderTextBlockStyle}">Gestion des Clients</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,10" Orientation="Horizontal" >
+                    <Grid Width="85" Height="85" Margin="0,0,20,0">
+                        <Rectangle Fill="{ ThemeResource PhoneAccentBrush}" />
+                        <Path Margin="10" Stretch="Uniform" UseLayoutRounding="False" Fill="{ ThemeResource PhoneButtonBasePressedForegroundBrush }" Data="F1 M 0,10.6641L 10.1434,9.19012L 14.6797,-3.05176e-005L 19.2161,9.19012L 28.6251,10.5573L 29.3595,10.6641L 22.0196,17.8204L 23.7527,27.922L 14.6797,23.1511L 5.60684,27.922L 7.3399,17.8204L 0,10.6641 Z "/>
+                    </Grid>
+                    <StackPanel>
+                        <TextBlock Style="{ StaticResource ListViewItemTextBlockStyle}">Site internet</TextBlock>
+                        <TextBlock Style="{ StaticResource ListViewItemSubheaderTextBlockStyle}">Site internet de Learning Comapny</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>
