@@ -26,13 +26,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Civilite.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Client.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Formateur.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Stagiaire.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Civilite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Formateur.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Stagiaire.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SampleData\FormateursSample.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\LearningCompanyApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FormateursViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WebService\LearningCompanyApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\FormateursViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)SampleData\Portrait.jpg" />
