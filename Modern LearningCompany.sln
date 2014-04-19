@@ -21,7 +21,6 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		LearningCompany_WinRT\LearningCompany_WinRT.Shared\LearningCompany_WinRT.Shared.projitems*{443bdd96-4744-491b-9e20-87913572e25a}*SharedItemsImports = 4
 		LearningCompany_WinRT\LearningCompany_WinRT.Shared\LearningCompany_WinRT.Shared.projitems*{2dba9e73-9282-4d69-9548-bcbac5d98d85}*SharedItemsImports = 13
-		LearningCompany_WinRT\LearningCompany_WinRT.Shared\LearningCompany_WinRT.Shared.projitems*{7e6655ae-4f09-4406-8fd5-04eddd4327bd}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 8

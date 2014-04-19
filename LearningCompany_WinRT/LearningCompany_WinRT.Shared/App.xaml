@@ -7,11 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:vm="using:LearningCompany_WinRT.ViewModel">
-
-    <Application.Resources>
-        <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
-    </Application.Resources>
-
+    
     <Application.Resources>
         <x:String x:Key="AppName">Learning Company</x:String>
     </Application.Resources>
