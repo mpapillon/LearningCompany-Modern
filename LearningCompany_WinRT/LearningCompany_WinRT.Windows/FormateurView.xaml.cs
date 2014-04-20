@@ -1,14 +1,10 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using LearningCompany_WinRT.Common;
+﻿using LearningCompany_WinRT.Common;
 using LearningCompany_WinRT.Models;
-using LearningCompany_WinRT.Services;
-using LearningCompany_WinRT.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -26,11 +22,11 @@ namespace LearningCompany_WinRT
     /// <summary>
     /// Page de base qui inclut des caractéristiques communes à la plupart des applications.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class FormateurView : Page
     {
+
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        //private readonly FormateurViewModel _viewModel = new FormateurViewModel();
 
         /// <summary>
         /// Cela peut être remplacé par un modèle d'affichage fortement typé.
@@ -50,16 +46,12 @@ namespace LearningCompany_WinRT
         }
 
 
-        public MainPage()
+        public FormateurView()
         {
             this.InitializeComponent();
-
-            //this.DataContext = _viewModel;
-
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-            this.Loaded += MainPage_Loaded;
         }
 
         /// <summary>
@@ -75,6 +67,10 @@ namespace LearningCompany_WinRT
         /// antérieure. L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            if(this.DataContext == null)
+            {
+                this.DataContext = e.NavigationParameter as Formateur;
+            }
         }
 
         /// <summary>
@@ -87,16 +83,6 @@ namespace LearningCompany_WinRT
         /// état sérialisable.</param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-        }
-
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            //_viewModel.Load();
-        }
-
-        private void ShowFormateur(Formateur formateur)
-        {
-            this.Frame.Navigate(typeof(FormateurView), formateur);
         }
 
         #region Inscription de NavigationHelper
@@ -112,13 +98,11 @@ namespace LearningCompany_WinRT
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Messenger.Default.Register<Formateur>(this, ShowFormateur);
             navigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            Messenger.Default.Unregister<Formateur>(this);
             navigationHelper.OnNavigatedFrom(e);
         }
 

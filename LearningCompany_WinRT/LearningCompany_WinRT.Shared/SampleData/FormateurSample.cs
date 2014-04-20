@@ -6,17 +6,13 @@ using System.Linq;
 
 namespace LearningCompany_WinRT.SampleData
 {
-    public class FormateursSample
+    public class FormateurSample
     {
-        private List<Formateur> _formateurs;
-        public List<Formateur> Formateurs 
-        {
-            get { return _formateurs; }
-        }
+        public IEnumerable<Formateur> Items { get; set; }
 
-        public FormateursSample()
+        public FormateurSample()
         {
-            _formateurs = new List<Formateur>
+            this.Items = new List<Formateur>
             {
                 new Formateur { Nom = "RAVAILLE", Prenom = "James", UrlPhoto = "portrait.png", Courriel = "jravaille@worldCompany.fr", Telephone = "0270704401", IntervenantExterieur = false, Infos = "Spécialisé en Biologie moléculaire" },
                 new Formateur { Nom = "BERTIN", Prenom = "Dominique", UrlPhoto = "portrait.png", Courriel = "dbertin@worldCompany.fr", Telephone = "0270704402", IntervenantExterieur = false, Infos = "Spécialisé en Pharmacie" },
@@ -34,22 +30,6 @@ namespace LearningCompany_WinRT.SampleData
                 new Formateur { Nom = "RUSKOV", Prenom = "Elise", UrlPhoto = "portrait.png", Courriel = "eruskov@worldCompany.fr", Telephone = "0683286446", IntervenantExterieur = true, Infos = "Enseigne les bases sur les architectures informatiques" },
                 new Formateur { Nom = "CADET", Prenom = "Nathalie", UrlPhoto = "portrait.png", Courriel = "ncadet@worldCompany.fr", Telephone = "0637624657", IntervenantExterieur = true, Infos = "Dispense les formations sur les usages des nouvelles molécules" }
             };
-        }
-
-        public ICollection<Formateur> FormateursInternes
-        {
-            get
-            {
-                return _formateurs.Where(f => f.IntervenantExterieur == false).ToList();
-            }
-        }
-
-        public ICollection<Formateur> FormateursExternes
-        {
-            get
-            {
-                return _formateurs.Where(f => f.IntervenantExterieur == true).ToList();
-            }
         }
     }
 }

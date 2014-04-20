@@ -10,6 +10,7 @@
     
     <Application.Resources>
         <x:String x:Key="AppName">Learning Company</x:String>
+        <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
     </Application.Resources>
     
 </Application>

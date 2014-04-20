@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <d:DesignProperties.DataContext>
-        <design:FormateursSample xmlns:design="using:LearningCompany_WinRT.SampleData" />
+        <design:FormateurSample xmlns:design="using:LearningCompany_WinRT.SampleData" />
     </d:DesignProperties.DataContext>
 
     <Page.BottomAppBar>
