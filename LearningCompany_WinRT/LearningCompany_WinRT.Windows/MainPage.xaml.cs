@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using LearningCompany_WinRT.Common;
 using LearningCompany_WinRT.Models;
-using LearningCompany_WinRT.Services;
 using LearningCompany_WinRT.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -48,6 +47,8 @@ namespace LearningCompany_WinRT
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+
+            this.Loaded += MainPage_Loaded;
         }
 
         /// <summary>
@@ -90,21 +91,33 @@ namespace LearningCompany_WinRT
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Messenger.Default.Register<Formateur>(this, ShowFormateur);
+            //Messenger.Default.Register<Formateur>(this, ShowFormateur);
             navigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            Messenger.Default.Unregister<Formateur>(this);
+            //Messenger.Default.Unregister<Formateur>(this);
             navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
 
-        private void ShowFormateur(Formateur formateur)
+        void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(FormateurView), formateur);
+            this.Menu.SelectedIndex = 0;
+        }
+
+        private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox menuListBox = sender as ListBox;
+
+            switch(menuListBox.SelectedIndex)
+            {
+                case 0:
+                    this.ContentFrame.Navigate(typeof(Views.FormateursView));
+                    break;
+            }
         }
     }
 }

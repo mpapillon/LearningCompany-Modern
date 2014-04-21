@@ -7,6 +7,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="LearningCompany_WinRT.Views.Formateurs.FormateursView"
     mc:Ignorable="d"
+    DataContext="{Binding Formateur, Source={StaticResource Locator}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
@@ -25,12 +26,9 @@
         </DataTemplate>
     </Page.Resources>
 
-	<Page.DataContext>
-		<Binding Path="Formateur" Source="{StaticResource Locator}"/>
-	</Page.DataContext>
-
     <Page.BottomAppBar>
         <CommandBar>
+            <AppBarButton Icon="Add" Label="Ajouter" />
             <AppBarButton x:Name="Refresh_btn" Icon="Sync" Label="Actualiser" Command="{Binding RefreshCommand}"/>
         </CommandBar>
     </Page.BottomAppBar>

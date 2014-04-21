@@ -11,6 +11,12 @@
     <Application.Resources>
         <x:String x:Key="AppName">Learning Company</x:String>
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+
+        <SolidColorBrush x:Key="ListBoxItemPointerOverBackgroundThemeBrush" Color="#272727" />
+        <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="#008cba" />
+        <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="#0078a0" />
+        <SolidColorBrush x:Key="ListBoxItemPressedBackgroundThemeBrush" Color="#272727" />
+
     </Application.Resources>
     
 </Application>

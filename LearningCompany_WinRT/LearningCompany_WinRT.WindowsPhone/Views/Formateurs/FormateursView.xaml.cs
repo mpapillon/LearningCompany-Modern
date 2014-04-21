@@ -1,6 +1,6 @@
 ﻿using LearningCompany_WinRT.Common;
 using LearningCompany_WinRT.Models;
-using LearningCompany_WinRT.ViewModels;
+using LearningCompany_WinRT.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;

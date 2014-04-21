@@ -34,8 +34,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\FormateurViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WebService\FormateurService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)WebService\LearningCompanyApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\FormateursViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)SampleData\Portrait.jpg" />
