@@ -29,7 +29,6 @@ namespace LearningCompany_WinRT.Views.Formateurs
     public sealed partial class FormateursView : Page
     {
         private NavigationHelper navigationHelper;
-        private FormateursViewModel defaultViewModel = new FormateursViewModel();
 
         public FormateursView()
         {
@@ -38,8 +37,6 @@ namespace LearningCompany_WinRT.Views.Formateurs
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-            this.DataContext = this.defaultViewModel;
         }
 
         /// <summary>
@@ -48,15 +45,6 @@ namespace LearningCompany_WinRT.Views.Formateurs
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        }
-
-        /// <summary>
-        /// Obtient le modèle d'affichage pour ce <see cref="Page"/>.
-        /// Cela peut être remplacé par un modèle d'affichage fortement typé.
-        /// </summary>
-        public FormateursViewModel DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -72,7 +60,6 @@ namespace LearningCompany_WinRT.Views.Formateurs
         /// antérieure.  L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            this.LoadData();
         }
 
         /// <summary>
@@ -85,30 +72,6 @@ namespace LearningCompany_WinRT.Views.Formateurs
         /// état sérialisable.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-        }
-
-        private async void LoadData(bool force = false)
-        {
-            if (!this.defaultViewModel.IsDataLoaded || force)
-            {
-                StatusBar statusBar = StatusBar.GetForCurrentView();
-                try
-                {
-                    statusBar.ProgressIndicator.Text = "Chargement des formateurs...";
-                    await statusBar.ProgressIndicator.ShowAsync();
-
-                    await this.defaultViewModel.LoadData(force);
-                }
-                catch
-                {
-                    string Title = "Impossible de charger les données";
-                    string Content = "Assurez vous d'être connecté à internet (Wi-Fi ou Cellulaire). Si le problème persiste, vérifiez l'adresse du service web dans les paramètres.";
-                    var msg = new MessageDialog(Content, Title);
-                    msg.ShowAsync();
-                }
-
-                await statusBar.ProgressIndicator.HideAsync();
-            }
         }
 
         #region Inscription de NavigationHelper
@@ -138,32 +101,9 @@ namespace LearningCompany_WinRT.Views.Formateurs
 
         #endregion
 
-        private void Formateurs_Externes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (Formateurs_Externes.SelectedItem != null)
-            {
-                ViewFormateursDetails(Formateurs_Externes.SelectedItem as Formateur);
-                Formateurs_Externes.SelectedItem = null;
-            }
-        }
-
-        private void Formateurs_Internes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (Formateurs_Internes.SelectedItem != null)
-            {
-                ViewFormateursDetails(Formateurs_Internes.SelectedItem as Formateur);
-                Formateurs_Internes.SelectedItem = null;
-            }
-        }
-
         private void ViewFormateursDetails(Formateur aFormateur)
         {
             this.Frame.Navigate(typeof(FormateurDetailsView), aFormateur);
-        }
-
-        private void Refresh_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.LoadData(true);
         }
     }
 }

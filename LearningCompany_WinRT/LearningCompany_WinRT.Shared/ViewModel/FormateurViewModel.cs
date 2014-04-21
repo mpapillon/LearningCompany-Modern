@@ -9,13 +9,18 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Windows.UI.Xaml.Controls;
+using System.Linq;
 
 namespace LearningCompany_WinRT.ViewModel
 {
     public class FormateurViewModel : ViewModelBase
     {
         private bool _isBusy;
-        private IEnumerable<Formateur> _items;
+        private bool _isDataLoaded = false;
+
+        private IEnumerable<Formateur> _formateurs;
+        private IEnumerable<Formateur> _formateursExternes;
+        private IEnumerable<Formateur> _formateursInternes;
         private Formateur _selectedItem;
 
         public IFormateurService FormateurService { get; set; }
@@ -26,35 +31,68 @@ namespace LearningCompany_WinRT.ViewModel
             set { Set(() => IsBusy, ref _isBusy, value); }
         }
 
+        public bool IsDataLoaded
+        {
+            get { return _isDataLoaded; }
+            set { Set(() => IsDataLoaded, ref _isDataLoaded, value); }
+        }
+
         public Formateur SelectedItem
         {
             get { return _selectedItem; }
             set { Set(() => SelectedItem, ref _selectedItem, value); }
         }
 
-        public IEnumerable<Formateur> Items
+        public IEnumerable<Formateur> Formateurs
         {
-            get { return _items; }
-            set { Set(() => Items, ref _items, value); }
+            get { return _formateurs; }
+            set { Set(() => Formateurs, ref _formateurs, value); }
+        }
+
+        public IEnumerable<Formateur> FormateursExternes
+        {
+            get { return _formateursExternes; }
+            set { Set(() => FormateursExternes, ref _formateursExternes, value); }
+        }
+
+        public IEnumerable<Formateur> FormateursInternes
+        {
+            get
+            {
+                if (ViewModelBase.IsInDesignModeStatic)
+                    return SampleData.FormateurSample.Items.Where(f => !f.IntervenantExterieur).ToArray();
+                else
+                    return _formateursInternes;
+            }
+            set { Set(() => FormateursInternes, ref _formateursInternes, value); }
         }
 
         #region Commands
 
+        public RelayCommand LoadDataCommand { get; set; }
         public RelayCommand RefreshCommand { get; set; }
-        public RelayCommand<SelectionChangedEventArgs> SelectionChangedCommand { get; set; }
+        public RelayCommand<SelectionChangedEventArgs> ShowFormateurCommand { get; set; }
 
         #endregion
 
         public FormateurViewModel()
         {
+            if(ViewModelBase.IsInDesignModeStatic)
+            {
+                this.Formateurs = SampleData.FormateurSample.Items;
+                this.FormateursExternes = SampleData.FormateurSample.Items.Where(f => f.IntervenantExterieur).ToArray();
+                this.FormateursInternes = SampleData.FormateurSample.Items.Where(f => !f.IntervenantExterieur).ToArray();
+            }
+
             CreateCommands();
             FormateurService = new FormateurService();
         }
 
         public void CreateCommands()
         {
+            this.LoadDataCommand = new RelayCommand(Load);
             this.RefreshCommand = new RelayCommand(RefreshHandler);
-            this.SelectionChangedCommand = new RelayCommand<SelectionChangedEventArgs>(OnSelectionChanged);
+            this.ShowFormateurCommand = new RelayCommand<SelectionChangedEventArgs>(OnShowFormateur);
         }
 
         private void RefreshHandler()
@@ -64,7 +102,8 @@ namespace LearningCompany_WinRT.ViewModel
 
         public void Load()
         {
-            RefreshData();
+            if(!IsDataLoaded)
+                RefreshData();
         }
 
         public async void RefreshData()
@@ -74,7 +113,13 @@ namespace LearningCompany_WinRT.ViewModel
 
             try
             {
-                Items = await FormateurService.GetAll();
+                await System.Threading.Tasks.Task.Delay(3000);
+
+                this.Formateurs = await FormateurService.GetAll();
+                this.FormateursExternes = Formateurs.Where(f => f.IntervenantExterieur).ToArray();
+                this.FormateursInternes = Formateurs.Where(f => !f.IntervenantExterieur).ToArray();
+
+                this.IsDataLoaded = true;
             }
             catch
             {
@@ -87,7 +132,7 @@ namespace LearningCompany_WinRT.ViewModel
             IsBusy = false;
         }
 
-        private void OnSelectionChanged(SelectionChangedEventArgs arg)
+        private void OnShowFormateur(SelectionChangedEventArgs arg)
         {
             if (this.SelectedItem == null)
                 return;

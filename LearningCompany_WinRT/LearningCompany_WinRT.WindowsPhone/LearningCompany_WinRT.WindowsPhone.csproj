@@ -19,6 +19,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <ExpressionBlendVersion>12.0.50320.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -93,10 +94,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Formateurs\FormateurNewView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Formateurs\FormateursView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,9 +109,6 @@
     </Compile>
     <Compile Include="Views\Formateurs\FormateurDetailsView.xaml.cs">
       <DependentUpon>FormateurDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Formateurs\FormateurNewView.xaml.cs">
-      <DependentUpon>FormateurNewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Formateurs\FormateursView.xaml.cs">
       <DependentUpon>FormateursView.xaml</DependentUpon>
@@ -156,6 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

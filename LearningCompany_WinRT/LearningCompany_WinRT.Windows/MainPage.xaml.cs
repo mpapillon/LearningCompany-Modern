@@ -5,6 +5,7 @@ using LearningCompany_WinRT.Services;
 using LearningCompany_WinRT.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -29,16 +30,6 @@ namespace LearningCompany_WinRT
     public sealed partial class MainPage : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        //private readonly FormateurViewModel _viewModel = new FormateurViewModel();
-
-        /// <summary>
-        /// Cela peut être remplacé par un modèle d'affichage fortement typé.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
 
         /// <summary>
         /// NavigationHelper est utilisé sur chaque page pour faciliter la navigation et 
@@ -54,12 +45,9 @@ namespace LearningCompany_WinRT
         {
             this.InitializeComponent();
 
-            //this.DataContext = _viewModel;
-
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-            this.Loaded += MainPage_Loaded;
         }
 
         /// <summary>
@@ -89,16 +77,6 @@ namespace LearningCompany_WinRT
         {
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            //_viewModel.Load();
-        }
-
-        private void ShowFormateur(Formateur formateur)
-        {
-            this.Frame.Navigate(typeof(FormateurView), formateur);
-        }
-
         #region Inscription de NavigationHelper
 
         /// Les méthodes fournies dans cette section sont utilisées simplement pour permettre
@@ -123,5 +101,10 @@ namespace LearningCompany_WinRT
         }
 
         #endregion
+
+        private void ShowFormateur(Formateur formateur)
+        {
+            this.Frame.Navigate(typeof(FormateurView), formateur);
+        }
     }
 }
