@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+      
+    
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <CommandBar.SecondaryCommands>
@@ -17,11 +19,11 @@
 
     <Grid x:Name="LayoutRoot">
 
-        <Grid.ChildrenTransitions>
+        <!--<Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
             </TransitionCollection>
-        </Grid.ChildrenTransitions>
+        </Grid.ChildrenTransitions>-->
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -37,6 +39,7 @@
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot">
             <ListView x:Name="Menu" Margin="24,0,0,0" SelectionChanged="Menu_SelectionChanged">
+                
                 <StackPanel Margin="0,0,0,10" Orientation="Horizontal" >
                     <Grid Width="85" Height="85" Margin="0,0,20,0">
                         <Rectangle Fill="{ ThemeResource PhoneAccentBrush}" />

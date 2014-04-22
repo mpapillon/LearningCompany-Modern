@@ -1,4 +1,5 @@
 ﻿using LearningCompany_WinRT.Common;
+using LearningCompany_WinRT.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
-using Windows.System;
+using Windows.UI.StartScreen;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,21 +17,20 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using LearningCompany_WinRT.Views;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace LearningCompany_WinRT
+namespace LearningCompany_WinRT.Views.Formateurs
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class FormateurDetailsView : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        public const string appbarTileId = "SecondaryTile.AppBar";
 
-        public MainPage()
+        public FormateurDetailsView()
         {
             this.InitializeComponent();
 
@@ -48,15 +48,6 @@ namespace LearningCompany_WinRT
         }
 
         /// <summary>
-        /// Obtient le modèle d'affichage pour ce <see cref="Page"/>.
-        /// Cela peut être remplacé par un modèle d'affichage fortement typé.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
-
-        /// <summary>
         /// Remplit la page à l'aide du contenu passé lors de la navigation. Tout état enregistré est également
         /// fourni lorsqu'une page est recréée à partir d'une session antérieure.
         /// </summary>
@@ -69,6 +60,10 @@ namespace LearningCompany_WinRT
         /// antérieure.  L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            if(DataContext == null)
+            {
+                DataContext = e.NavigationParameter as Formateur;
+            }
         }
 
         /// <summary>
@@ -110,24 +105,40 @@ namespace LearningCompany_WinRT
 
         #endregion
 
-        private async void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ContactActions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch(Menu.SelectedIndex)
+            ListView obj = sender as ListView;
+            switch(obj.SelectedIndex)
             {
-                case 0:
-                    this.Frame.Navigate(typeof(LearningCompany_WinRT.Views.Formateurs.FormateursView));
-                    break;
-                case 3:
-                    await Launcher.LaunchUriAsync(new Uri("http://192.168.1.15:24609/"));
+                case 1:
+                    this.SendEmailMessage();
                     break;
             }
-            
-            Menu.SelectedIndex = -1;
+
+            obj.SelectedItem = null;
         }
 
-        private void Settings_btn_Click(object sender, RoutedEventArgs e)
+        private async void SendEmailMessage()
         {
-            this.Frame.Navigate(typeof(SettingsPage));
+            Formateur formateur = DataContext as Formateur;
+
+            var emailMessage = new Windows.ApplicationModel.Email.EmailMessage();
+            emailMessage.To.Add(new Windows.ApplicationModel.Email.EmailRecipient(formateur.Courriel));
+
+            await Windows.ApplicationModel.Email.EmailManager.ShowComposeNewEmailAsync(emailMessage);
+        }
+
+        private async void PinButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Uri logo = new Uri("ms-appx:///SampleData/Portrait.jpg");
+            //string tileActivationArguments = appbarTileId + " was pinned at " + DateTime.Now.ToLocalTime().ToString();
+
+            //SecondaryTile secondaryTile = new SecondaryTile(appbarTileId, "Test", "argument", logo, TileSize.Default);
+
+            //secondaryTile.VisualElements.ForegroundText = ForegroundText.Light;
+            //secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = true;
+
+            //bool isPinned = await secondaryTile.RequestCreateForSelectionAsync(new Rect { Height=256, Width=256 });
         }
     }
 }

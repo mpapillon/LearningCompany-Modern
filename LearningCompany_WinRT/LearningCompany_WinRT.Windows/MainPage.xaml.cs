@@ -115,7 +115,7 @@ namespace LearningCompany_WinRT
             switch(menuListBox.SelectedIndex)
             {
                 case 0:
-                    this.ContentFrame.Navigate(typeof(Views.FormateursView));
+                    this.ContentFrame.Navigate(typeof(View.FormateursView));
                     break;
             }
         }

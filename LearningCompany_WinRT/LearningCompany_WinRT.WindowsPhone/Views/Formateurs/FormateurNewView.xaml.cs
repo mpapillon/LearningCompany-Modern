@@ -7,7 +7,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
-using Windows.System;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,21 +15,20 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using LearningCompany_WinRT.Views;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace LearningCompany_WinRT
+namespace LearningCompany_WinRT.Views.Formateurs
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class FormateurNewView : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public MainPage()
+        public FormateurNewView()
         {
             this.InitializeComponent();
 
@@ -109,25 +107,5 @@ namespace LearningCompany_WinRT
         }
 
         #endregion
-
-        private async void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            switch(Menu.SelectedIndex)
-            {
-                case 0:
-                    this.Frame.Navigate(typeof(LearningCompany_WinRT.Views.Formateurs.FormateursView));
-                    break;
-                case 3:
-                    await Launcher.LaunchUriAsync(new Uri("http://192.168.1.15:24609/"));
-                    break;
-            }
-            
-            Menu.SelectedIndex = -1;
-        }
-
-        private void Settings_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(SettingsPage));
-        }
     }
 }

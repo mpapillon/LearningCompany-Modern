@@ -21,11 +21,14 @@ namespace LearningCompany_WinRT.WebService
 
     public class FormateurService : IFormateurService
     {
-        private readonly string _serviceUrl = "http://localhost:24609/api/Formateurs";
+        public readonly string _serviceUrl = "http://localhost:24609/api/Formateurs";
         private readonly HttpClient _client = new HttpClient();
 
-        public FormateurService()
+        public FormateurService(string apiurl = null)
         {
+            if (!String.IsNullOrEmpty(apiurl))
+                _serviceUrl = apiurl + "/Formateurs";
+
             var headers = _client.DefaultRequestHeaders;
             headers.Accept.ParseAdd("application/xml");
         }

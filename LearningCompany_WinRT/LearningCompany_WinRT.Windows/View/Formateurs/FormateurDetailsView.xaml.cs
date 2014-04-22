@@ -1,4 +1,5 @@
 ﻿using LearningCompany_WinRT.Common;
+using LearningCompany_WinRT.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,12 +17,12 @@ using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkId=234237
 
-namespace LearningCompany_WinRT.Views
+namespace LearningCompany_WinRT.View
 {
     /// <summary>
     /// Page de base qui inclut des caractéristiques communes à la plupart des applications.
     /// </summary>
-    public sealed partial class FormateursView : Page
+    public sealed partial class FormateurDetailsView : Page
     {
 
         private NavigationHelper navigationHelper;
@@ -36,7 +37,7 @@ namespace LearningCompany_WinRT.Views
         }
 
 
-        public FormateursView()
+        public FormateurDetailsView()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
@@ -57,6 +58,7 @@ namespace LearningCompany_WinRT.Views
         /// antérieure. L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            this.DataContext = e.NavigationParameter as Formateur;
         }
 
         /// <summary>

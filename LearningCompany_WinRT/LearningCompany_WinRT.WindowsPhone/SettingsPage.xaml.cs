@@ -1,5 +1,4 @@
 ﻿using LearningCompany_WinRT.Common;
-using LearningCompany_WinRT.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,23 +18,28 @@ using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace LearningCompany_WinRT.Views.Formateurs
+namespace LearningCompany_WinRT
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class FormateurDetailsView : Page
+    public sealed partial class SettingsPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private Windows.Storage.ApplicationDataContainer localSettings;
 
-        public FormateurDetailsView()
+        public SettingsPage()
         {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            this.localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;  
+
+            if(localSettings.Values.ContainsKey("apiUrl"))
+                this.apiUrl_tbx.Text = localSettings.Values["apiUrl"] as string;
         }
 
         /// <summary>
@@ -68,10 +72,6 @@ namespace LearningCompany_WinRT.Views.Formateurs
         /// antérieure.  L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            if(DataContext == null)
-            {
-                DataContext = e.NavigationParameter as Formateur;
-            }
         }
 
         /// <summary>
@@ -113,27 +113,9 @@ namespace LearningCompany_WinRT.Views.Formateurs
 
         #endregion
 
-        private void ContactActions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void apiUrl_tbx_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ListView obj = sender as ListView;
-            switch(obj.SelectedIndex)
-            {
-                case 1:
-                    this.SendEmailMessage();
-                    break;
-            }
-
-            obj.SelectedItem = null;
-        }
-
-        private async void SendEmailMessage()
-        {
-            Formateur formateur = DataContext as Formateur;
-
-            var emailMessage = new Windows.ApplicationModel.Email.EmailMessage();
-            emailMessage.To.Add(new Windows.ApplicationModel.Email.EmailRecipient(formateur.Courriel));
-
-            await Windows.ApplicationModel.Email.EmailManager.ShowComposeNewEmailAsync(emailMessage);
+            this.localSettings.Values["apiUrl"] = apiUrl_tbx.Text;
         }
     }
 }

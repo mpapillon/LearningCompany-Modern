@@ -14,15 +14,11 @@
 
     <Page.BottomAppBar>
         <CommandBar>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Partager le fomateur" />
-            </CommandBar.SecondaryCommands>
-            <AppBarButton Icon="Save" Label="Enregistrer"/>
-            <AppBarButton Icon="Pin" Label="Epingler"/>
+            <AppBarButton x:Name="PinButton" Icon="Pin" Label="Epingler" Click="PinButton_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid x:Name="LayoutRoot" d:DataContext="{Binding Formateurs[0]}">
+    <Grid x:Name="LayoutRoot" d:DataContext="{Binding Items[0]}">
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>

@@ -90,15 +90,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Formateurs\FormateurDetailsView.xaml">
+    <Page Include="View\Formateurs\FormateurDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Formateurs\FormateursView.xaml">
+    <Page Include="View\Formateurs\FormateursView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsView.xaml">
+    <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,15 +107,15 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Formateurs\FormateurDetailsView.xaml.cs">
+    <Compile Include="View\Formateurs\FormateurDetailsView.xaml.cs">
       <DependentUpon>FormateurDetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Formateurs\FormateursView.xaml.cs">
+    <Compile Include="View\Formateurs\FormateursView.xaml.cs">
       <DependentUpon>FormateursView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +132,7 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Stagiaires\" />
+    <Folder Include="View\Stagiaires\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">

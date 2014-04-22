@@ -1,4 +1,7 @@
-﻿using LearningCompany_WinRT.Common;
+﻿using GalaSoft.MvvmLight.Messaging;
+using LearningCompany_WinRT.Common;
+using LearningCompany_WinRT.Models;
+using LearningCompany_WinRT.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,28 +22,22 @@ using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace LearningCompany_WinRT.Views
+namespace LearningCompany_WinRT.Views.Formateurs
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class SettingsView : Page
+    public sealed partial class FormateursView : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private Windows.Storage.ApplicationDataContainer localSettings;
 
-        public SettingsView()
+        public FormateursView()
         {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            this.localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;  
-
-            if(localSettings.Values.ContainsKey("apiUrl"))
-                this.apiUrl_tbx.Text = localSettings.Values["apiUrl"] as string;
         }
 
         /// <summary>
@@ -48,15 +46,6 @@ namespace LearningCompany_WinRT.Views
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        }
-
-        /// <summary>
-        /// Obtient le modèle d'affichage pour ce <see cref="Page"/>.
-        /// Cela peut être remplacé par un modèle d'affichage fortement typé.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -103,19 +92,26 @@ namespace LearningCompany_WinRT.Views
         /// les gestionnaires d'événements qui ne peuvent pas annuler la requête de navigation.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Messenger.Default.Register<Formateur>(this, FormateursDetails);
             this.navigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            Messenger.Default.Unregister<Formateur>(this);
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
 
-        private void apiUrl_tbx_TextChanged(object sender, TextChangedEventArgs e)
+        private void FormateursDetails(Formateur aFormateur)
         {
-            this.localSettings.Values["apiUrl"] = apiUrl_tbx.Text;
+            this.Frame.Navigate(typeof(FormateurDetailsView), aFormateur);
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SettingsPage));
         }
     }
 }

@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+#if WINDOWS_APP
+using Windows.UI.ApplicationSettings;
+#endif
 
 // Pour plus d'informations sur le modèle Application vide, consultez la page http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -133,5 +136,23 @@ namespace LearningCompany_WinRT
             // TODO: enregistrez l'état de l'application et arrêtez toute activité en arrière-plan
             deferral.Complete();
         }
+
+#if WINDOWS_APP
+        protected override void OnWindowCreated(WindowCreatedEventArgs args)
+        {
+            SettingsPane.GetForCurrentView().CommandsRequested += OnCommandsRequested;
+        }
+
+        private void OnCommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            args.Request.ApplicationCommands.Add(new SettingsCommand("Paramètres", "Paramètres", (handler) => ShowMainSettingsFlyout()));
+        }
+
+        public void ShowMainSettingsFlyout()
+        {
+            MainSettingsFlyout mainSettings = new MainSettingsFlyout();
+            mainSettings.Show();
+        }
+#endif
     }
 }
