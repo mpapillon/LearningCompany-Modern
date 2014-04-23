@@ -57,6 +57,10 @@ namespace LearningCompany_WinRT
             }
 #endif
 
+#if WINDOWS_PHONE_APP
+            this.addToCortana();
+#endif
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Ne répétez pas l'initialisation de l'application lorsque la fenêtre comporte déjà du contenu,
@@ -109,6 +113,13 @@ namespace LearningCompany_WinRT
         }
 
 #if WINDOWS_PHONE_APP
+        private async void addToCortana()
+        {
+
+            var storageFile = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///LearningCompany_Cortana.xml"));
+            await Windows.Media.SpeechRecognition.VoiceCommandManager.InstallCommandSetsFromStorageFileAsync(storageFile);
+        }
+
         /// <summary>
         /// Restaure les transitions de contenu une fois l'application lancée.
         /// </summary>

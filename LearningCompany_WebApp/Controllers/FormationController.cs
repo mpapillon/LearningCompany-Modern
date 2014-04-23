@@ -77,7 +77,7 @@ namespace LearningCompany.Controllers
                     {
                         _db.Formations.Add(formationP);
                         _db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Details", new { id = formationP.FormationID });
                     }
                     return View("CreatePresentielle", formationP);
 
@@ -88,7 +88,7 @@ namespace LearningCompany.Controllers
                     {
                         _db.Formations.Add(formationE);
                         _db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Details", new { id = formationE.FormationID });
                     }
                     return View("CreateElearning", formationE);
 

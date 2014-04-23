@@ -99,6 +99,11 @@ namespace LearningCompany.Entities
             }
         }
 
+        public override string ToString()
+        {
+            return this.NomComplet;
+        }
+
         #endregion
     }
 }

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<LearningCompany.Entities.SessionFormation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Commercial
+        </th>
+        <th>
+            Formateur
+        </th>
+        <th>
+            Ref. formation
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateDebut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Intervenant)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commercial.NomUtilisateur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Formateur.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Formation.Reference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDebut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Intervenant)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.SessionFormationID, formationId = item.FormationID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.SessionFormationID, formationId = item.FormationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.SessionFormationID, formationId = item.FormationID })
+        </td>
+    </tr>
+}
+
+</table>

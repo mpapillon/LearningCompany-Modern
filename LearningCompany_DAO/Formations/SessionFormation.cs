@@ -19,9 +19,11 @@ namespace LearningCompany.Entities
         public int FormationID { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? DateDebut { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? DateFin { get; set; }
 
         [Required]

@@ -10,11 +10,9 @@ namespace LearningCompany.Entities
     public class DemandeClient
     {
         [Key]
-        [Column(Order = 1)] 
         public int DemandeClientID { get; set; }
 
-        [Key]
-        [Column(Order = 2), Index]
+        [Index]
         public int FormationID { get; set; }
 
         [Required]
@@ -27,6 +25,6 @@ namespace LearningCompany.Entities
         public int ClientID { get; set; }
         public virtual Client Client { get; set; }
 
-        public virtual Formateur Formation { get; set; }
+        public virtual Formation Formation { get; set; }
     }
 }

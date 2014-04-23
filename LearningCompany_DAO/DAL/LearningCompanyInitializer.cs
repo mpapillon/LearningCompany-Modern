@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LearningCompany.Entities
 {
-    public class LearningCompanyInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<LearningCompanyContext>
+    public class LearningCompanyInitializer : System.Data.Entity.DropCreateDatabaseAlways<LearningCompanyContext>
     {
         protected override void Seed(LearningCompanyContext context)
         {
@@ -146,6 +146,51 @@ namespace LearningCompany.Entities
             };
 
             formations.ForEach(f => context.Formations.Add(f));
+            context.SaveChanges();
+
+            var sessions = new List<SessionFormation>
+            {
+                new SessionFormation { Formation = formations[0], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 14), DateFin = new DateTime(2009, 09, 16), Intervenant = false, Formateur = formateurs[5], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[0], stagiaires[1], stagiaires[3] } },
+                new SessionFormation { Formation = formations[0], SessionFormationID = 2, DateDebut = new DateTime(2009, 09, 28), DateFin = new DateTime(2009, 09, 30), Intervenant = true, Formateur = formateurs[10], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[14], stagiaires[8] } },
+                new SessionFormation { Formation = formations[1], SessionFormationID = 1, DateDebut = new DateTime(2009, 10, 05), DateFin = new DateTime(2009, 10, 09), Intervenant = true, Formateur = formateurs[6], Commercial = commerciaux[1], Stagiaires = new Stagiaire[] { stagiaires[9] } },
+                new SessionFormation { Formation = formations[2], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 07), DateFin = new DateTime(2009, 09, 11), Intervenant = false, Formateur = formateurs[1], Commercial = commerciaux[1], Stagiaires = new Stagiaire[] { stagiaires[15], stagiaires[10] } },
+                new SessionFormation { Formation = formations[2], SessionFormationID = 2, DateDebut = new DateTime(2009, 09, 14), DateFin = new DateTime(2009, 09, 18), Intervenant = false, Formateur = formateurs[12], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[8], stagiaires[11], stagiaires[3] } },
+                new SessionFormation { Formation = formations[4], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 21), DateFin = new DateTime(2009, 09, 23), Intervenant = true, Formateur = formateurs[7], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[6] } },
+                new SessionFormation { Formation = formations[6], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 24), DateFin = new DateTime(2009, 09, 25), Intervenant = true, Formateur = formateurs[8], Commercial = commerciaux[1], Stagiaires = new Stagiaire[] { stagiaires[13] } },
+                new SessionFormation { Formation = formations[7], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 21), DateFin = new DateTime(2009, 09, 25), Intervenant = false, Formateur = formateurs[2], Commercial = commerciaux[1], Stagiaires = new Stagiaire[] { stagiaires[4], stagiaires[3] } },
+                new SessionFormation { Formation = formations[8], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 21), DateFin = new DateTime(2009, 09, 22), Intervenant = true, Formateur = formateurs[1], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[7], stagiaires[1] } },
+                new SessionFormation { Formation = formations[15], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 23), DateFin = new DateTime(2009, 09, 25), Intervenant = true, Formateur = formateurs[2], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[0], stagiaires[6] } },
+                new SessionFormation { Formation = formations[16], SessionFormationID = 1, DateDebut = new DateTime(2009, 11, 23), DateFin = new DateTime(2009, 11, 26), Intervenant = true, Formateur = formateurs[8], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[10], stagiaires[11], stagiaires[12] } },
+                new SessionFormation { Formation = formations[10], SessionFormationID = 1, DateDebut = new DateTime(2009, 11, 09), DateFin = new DateTime(2009, 11, 10), Intervenant = true, Formateur = formateurs[8], Commercial = commerciaux[1], Stagiaires = new Stagiaire[] { stagiaires[9], stagiaires[3], stagiaires[7] } },
+                new SessionFormation { Formation = formations[12], SessionFormationID = 1, DateDebut = new DateTime(2009, 12, 07), DateFin = new DateTime(2009, 12, 11), Intervenant = true, Formateur = formateurs[8], Commercial = commerciaux[1], Stagiaires = new Stagiaire[] { stagiaires[0] } },
+                new SessionFormation { Formation = formations[13], SessionFormationID = 1, DateDebut = new DateTime(2009, 11, 23), DateFin = new DateTime(2009, 11, 27), Intervenant = true, Formateur = formateurs[8], Commercial = commerciaux[1], Stagiaires = new Stagiaire[] { stagiaires[11], stagiaires[3] } },
+                new SessionFormation { Formation = formations[17], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 21), DateFin = new DateTime(2009, 09, 23), Intervenant = true, Formateur = formateurs[10], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[13] } },
+                new SessionFormation { Formation = formations[18], SessionFormationID = 1, DateDebut = new DateTime(2009, 10, 12), DateFin = new DateTime(2009, 10, 16), Intervenant = true, Formateur = formateurs[10], Commercial = commerciaux[1], Stagiaires = new Stagiaire[] { stagiaires[12] } }
+            };
+
+            sessions.ForEach(s => context.SessionsFormations.Add(s));
+            context.SaveChanges();
+
+            var demandes = new List<DemandeClient> 
+            {
+                new DemandeClient { Client = clients[0], Formation = formations[0], DateDemande = new DateTime(2010, 06, 20), DateTraitement = null },
+                new DemandeClient { Client = clients[6], Formation = formations[0], DateDemande = new DateTime(2010, 07, 24), DateTraitement = null },
+                new DemandeClient { Client = clients[0], Formation = formations[1], DateDemande = new DateTime(2010, 07, 25), DateTraitement = new DateTime?(new DateTime(2010, 07, 27, 20, 51, 28)) },
+                new DemandeClient { Client = clients[6], Formation = formations[1], DateDemande = new DateTime(2010, 06, 20), DateTraitement = null },
+                new DemandeClient { Client = clients[0], Formation = formations[2], DateDemande = new DateTime(2010, 07, 24), DateTraitement = null },
+                new DemandeClient { Client = clients[1], Formation = formations[6], DateDemande = new DateTime(2010, 06, 20), DateTraitement = new DateTime?(new DateTime(2010, 07, 23, 20, 51, 28)) },
+                new DemandeClient { Client = clients[5], Formation = formations[7], DateDemande = new DateTime(2010, 06, 20), DateTraitement = null },
+                new DemandeClient { Client = clients[2], Formation = formations[7], DateDemande = new DateTime(2010, 06, 20), DateTraitement = null },
+                new DemandeClient { Client = clients[3], Formation = formations[8], DateDemande = new DateTime(2010, 07, 24), DateTraitement = null },
+                new DemandeClient { Client = clients[5], Formation = formations[8], DateDemande = new DateTime(2010, 08, 01), DateTraitement = new DateTime?(new DateTime(2010, 08, 06, 20, 51, 28)) },
+                new DemandeClient { Client = clients[4], Formation = formations[9], DateDemande = new DateTime(2010, 07, 25), DateTraitement = new DateTime?(new DateTime(2010, 07, 27, 20, 51, 28)) },
+                new DemandeClient { Client = clients[1], Formation = formations[11], DateDemande = new DateTime(2010, 08, 01), DateTraitement = new DateTime?(new DateTime(2010, 08, 06, 20, 51, 28)) },
+                new DemandeClient { Client = clients[4], Formation = formations[13], DateDemande = new DateTime(2010, 07, 24), DateTraitement = null },
+                new DemandeClient { Client = clients[2], Formation = formations[15], DateDemande = new DateTime(2010, 07, 25), DateTraitement = null },
+                new DemandeClient { Client = clients[3], Formation = formations[17], DateDemande = new DateTime(2010, 07, 25), DateTraitement = new DateTime?(new DateTime(2010, 07, 06, 20, 51, 28)) },
+            };
+
+            demandes.ForEach(d => context.DemandesClients.Add(d));
             context.SaveChanges();
             
         }

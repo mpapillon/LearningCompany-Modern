@@ -1,0 +1,66 @@
+﻿@model LearningCompany.Entities.SessionFormation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SessionFormation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Commercial.NomUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commercial.NomUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Formateur.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Formateur.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Formation.Reference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Formation.Reference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateDebut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateDebut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Intervenant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Intervenant)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

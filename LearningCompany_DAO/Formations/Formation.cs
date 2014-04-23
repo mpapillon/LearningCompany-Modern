@@ -40,6 +40,15 @@ namespace LearningCompany.Entities
         public virtual ICollection<SessionFormation> SessionsFormations { get; set; }
         public virtual ICollection<Formateur> Formateurs { get; set; }
         public virtual ICollection<DemandeClient> DemandesClients { get; set; }
+
+        public string ShortDescription
+        {
+            get
+            {
+                return this.Reference + " - " + this.Libelle;
+            }
+        }
+
         #endregion
     }
 }

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.1">
+  
+  <CommandSet xml:lang="fr-fr">
+    <CommandPrefix>Learning Company</CommandPrefix>
+    <Example> Affiche moi les formateurs </Example>
+
+    <Command Name="showWidgets">
+      <Example>Affiche moi les formateurs</Example>
+      <ListenFor> [Affiche] {type} </ListenFor>
+      <Feedback> Affichage des {type} </Feedback>
+      <Navigate Target="View/Formateurs/FormateursView.xaml"/>
+    </Command>
+
+    <PhraseList Label="type">
+      <Item>formateurs</Item>
+    </PhraseList>
+
+  </CommandSet>
+
+</VoiceCommands>

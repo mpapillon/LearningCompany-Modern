@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\portraits\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
     <Compile Include="Controllers\Services\FormateursController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SessionFormationsController.cs" />
     <Compile Include="Controllers\StagiairesController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,6 +242,11 @@
     <Content Include="Views\Formation\Index.cshtml" />
     <Content Include="Views\Theme\_Navigation.cshtml" />
     <Content Include="Views\Formation\CreatePresentielle.cshtml" />
+    <Content Include="Views\SessionFormations\Create.cshtml" />
+    <Content Include="Views\SessionFormations\Delete.cshtml" />
+    <Content Include="Views\SessionFormations\Details.cshtml" />
+    <Content Include="Views\SessionFormations\Edit.cshtml" />
+    <Content Include="Views\SessionFormations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LearningCompany_DAO\LearningCompany_DAO.csproj">
