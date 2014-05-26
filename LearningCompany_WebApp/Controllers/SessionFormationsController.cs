@@ -53,8 +53,22 @@ namespace LearningCompany.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SessionFormationID,FormationID,DateDebut,DateFin,Intervenant,FormateurID,CommercialID")] SessionFormation sessionFormation)
+        public ActionResult Create([Bind(Include = "FormationID,DateDebut,DateFin,Intervenant,FormateurID,CommercialID")] SessionFormation sessionFormation)
         {
+            // Incrémentation de l'indentifiant de la session de formation
+            var idFormation = sessionFormation.FormationID;
+            var aFormation = _db.Formations.FirstOrDefault(f => f.FormationID == idFormation);
+
+            if (aFormation.SessionsFormations.Count > 0)
+            {
+                var lastId = aFormation.SessionsFormations.Max(sf => sf.SessionFormationID);
+                sessionFormation.SessionFormationID = lastId + 1;
+            }
+            else
+            {
+                sessionFormation.SessionFormationID = 1;
+            }
+
             if (ModelState.IsValid)
             {
                 _db.SessionsFormations.Add(sessionFormation);
@@ -129,6 +143,13 @@ namespace LearningCompany.Controllers
             _db.SessionsFormations.Remove(sessionFormation);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Test(int id)
+        {
+            var formation = _db.Formations.FirstOrDefault(f => f.FormationID == id);
+            var maxId = formation.SessionsFormations.Max(sf => sf.SessionFormationID);
+            return View(); ;
         }
 
         protected override void Dispose(bool disposing)

@@ -10,6 +10,7 @@ namespace LearningCompany.Entities
     {
         protected override void Seed(LearningCompanyContext context)
         {
+            #region Themes
             var themes = new List<Theme>
             {
                 new Theme { Libelle = "Microsoft Office" },
@@ -26,7 +27,9 @@ namespace LearningCompany.Entities
 
             themes.ForEach(t => context.Themes.Add(t));
             context.SaveChanges();
+            #endregion
 
+            #region Secteurs d'activités
             var secteursActivite = new List<SecteurActivite>
             {
                 new SecteurActivite { Libelle = "Réseau de Distribution" },
@@ -43,7 +46,9 @@ namespace LearningCompany.Entities
 
             secteursActivite.ForEach(sa => context.SecteursActivites.Add(sa));
             context.SaveChanges();
+            #endregion
 
+            #region Civilites
             var civilites = new List<Civilite>
             {
                 new Civilite { LibelleCourt = "Mlle", LibelleLong = "Mademoiselle" },
@@ -53,7 +58,9 @@ namespace LearningCompany.Entities
 
             civilites.ForEach(c => context.Civilites.Add(c));
             context.SaveChanges();
+            #endregion
 
+            #region Formateurs
             var formateurs = new List<Formateur>
             {
                 new Formateur { Nom = "RAVAILLE", Prenom = "James", UrlPhoto = "portrait.png", Courriel = "jravaille@worldCompany.fr", Telephone = "0270704401", IntervenantExterieur = false, Infos = "Spécialisé en Biologie moléculaire", Civilite = civilites[2] },
@@ -75,7 +82,9 @@ namespace LearningCompany.Entities
 
             formateurs.ForEach(f => context.Formateurs.Add(f));
             context.SaveChanges();
+            #endregion
 
+            #region Commerciaux
             var commerciaux = new List<Commercial>
             {
                 new Commercial { NomUtilisateur = "lseila", MotDePasse = "al153B", Nom = "SEILA", Prenom = "Louisa", Courriel = "lseila@WorldCompany.fr", Civilite = civilites[1] },
@@ -84,7 +93,9 @@ namespace LearningCompany.Entities
 
             commerciaux.ForEach(com => context.Commerciaux.Add(com));
             context.SaveChanges();
+            #endregion
 
+            #region Clients
             var clients = new List<Client>
             {
                 new Client { Reference = "GSB MASSON", RaisonSociale = "GSB MASSON Industries", Adresse = "10, Avenue Charles de Gaulle", CodePostal = "44000", Ville = "Nantes", Telephone = "0240334920", Courriel = "gsbinfo@masson.fr", UrlSite = "http://gsbmasson.free.fr", MotDePasse = "9084CA12", Commercial = commerciaux[1], SecteurActivite = secteursActivite[0] },
@@ -98,7 +109,9 @@ namespace LearningCompany.Entities
 
             clients.ForEach(cli => context.Clients.Add(cli));
             context.SaveChanges();
+            #endregion
 
+            #region Stagiaires
             var stagiaires = new List<Stagiaire>
             {
                 new Stagiaire { Nom = "LEGRAND", Prenom = "David", Courriel = "david.legrand@masson.fr", Civilite = civilites[2], Client = clients[0]},
@@ -121,7 +134,9 @@ namespace LearningCompany.Entities
 
             stagiaires.ForEach(sta => context.Stagiaires.Add(sta));
             context.SaveChanges();
+            #endregion
 
+            #region Formations
             var formations = new List<Formation>
             {
                 new FormationPresentielle { Reference = "B21-005", Libelle = "Découvrir les nouveautés de Microsoft Word 2010", NombreJours = 3, Prix = 850.0M, Description = "Permet d''étudier les principales fonctionnalités de Microsoft Word", Theme = themes[0], Lieu = "Avenue de la République, Salle 1 - PARIS", Formateurs = new List<Formateur>{ formateurs[5], formateurs[6] }},
@@ -147,7 +162,9 @@ namespace LearningCompany.Entities
 
             formations.ForEach(f => context.Formations.Add(f));
             context.SaveChanges();
+            #endregion
 
+            #region Sessions
             var sessions = new List<SessionFormation>
             {
                 new SessionFormation { Formation = formations[0], SessionFormationID = 1, DateDebut = new DateTime(2009, 09, 14), DateFin = new DateTime(2009, 09, 16), Intervenant = false, Formateur = formateurs[5], Commercial = commerciaux[0], Stagiaires = new Stagiaire[] { stagiaires[0], stagiaires[1], stagiaires[3] } },
@@ -170,7 +187,9 @@ namespace LearningCompany.Entities
 
             sessions.ForEach(s => context.SessionsFormations.Add(s));
             context.SaveChanges();
+            #endregion
 
+            #region Demandes Clients
             var demandes = new List<DemandeClient> 
             {
                 new DemandeClient { Client = clients[0], Formation = formations[0], DateDemande = new DateTime(2010, 06, 20), DateTraitement = null },
@@ -192,7 +211,8 @@ namespace LearningCompany.Entities
 
             demandes.ForEach(d => context.DemandesClients.Add(d));
             context.SaveChanges();
-            
+            #endregion
+
         }
     }
 }
