@@ -53,7 +53,7 @@
 
             <Rectangle Grid.Column="0" Height="216" Width="216" Margin="10,10,0,10" HorizontalAlignment="Left" VerticalAlignment="Top" >
                 <Rectangle.Fill>
-                    <ImageBrush Stretch="Fill" ImageSource="ms-appx:///SampleData/Portrait.jpg"/>
+                    <ImageBrush Stretch="Fill" ImageSource="{Binding UrlPhoto}"/>
                 </Rectangle.Fill>
             </Rectangle>
             

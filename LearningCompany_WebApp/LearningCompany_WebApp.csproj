@@ -152,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\portraits\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +166,7 @@
     <Compile Include="Controllers\Services\FormateursController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Services\StagiairesController.cs" />
     <Compile Include="Controllers\SessionFormationsController.cs" />
     <Compile Include="Controllers\StagiairesController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
@@ -185,6 +185,21 @@
     <Content Include="Content\foundation\foundation.mvc.css" />
     <Content Include="Content\foundation\normalize.css" />
     <Content Include="Content\Icomoon.css" />
+    <Content Include="Content\portraits\alonguet.jpg" />
+    <Content Include="Content\portraits\arivet.jpg" />
+    <Content Include="Content\portraits\dbertin.jpg" />
+    <Content Include="Content\portraits\eruskov.jpg" />
+    <Content Include="Content\portraits\fhelis.jpg" />
+    <Content Include="Content\portraits\fvadort.jpg" />
+    <Content Include="Content\portraits\jdadet.jpg" />
+    <Content Include="Content\portraits\jdollon.jpg" />
+    <Content Include="Content\portraits\jlduvert.jpg" />
+    <Content Include="Content\portraits\jravaille.jpg" />
+    <Content Include="Content\portraits\lreis.jpg" />
+    <Content Include="Content\portraits\magostino.jpg" />
+    <Content Include="Content\portraits\ncadet.jpg" />
+    <Content Include="Content\portraits\pdannez.jpg" />
+    <Content Include="Content\portraits\pversault.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

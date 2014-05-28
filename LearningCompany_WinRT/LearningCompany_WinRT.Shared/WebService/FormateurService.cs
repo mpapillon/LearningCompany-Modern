@@ -33,6 +33,12 @@ namespace LearningCompany_WinRT.WebService
             headers.Accept.ParseAdd("application/xml");
         }
 
+        public string GetBaseUrl()
+        {
+            var split = _serviceUrl.Split('/');
+            return split[0] + "//" + split[2] + "/";
+        }
+
         public async Task<IEnumerable<Formateur>> GetAll()
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(_serviceUrl));

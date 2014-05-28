@@ -22,15 +22,15 @@ namespace LearningCompany_WinRT.ViewModel
         private bool _isDataLoaded = false;
         private bool _isDataCached;
 
-        private readonly string _cacheName = "Formateurs_Cache.xml";
-        private StorageFolder _localFolder = ApplicationData.Current.LocalFolder;
+        //private readonly string _cacheName = "Formateurs_Cache.xml";
+        //private StorageFolder _localFolder = ApplicationData.Current.LocalFolder;
 
         private IEnumerable<Formateur> _formateurs;
         private IEnumerable<Formateur> _formateursExternes;
         private IEnumerable<Formateur> _formateursInternes;
         private Formateur _selectedItem;
 
-        public FormateurService FormateurService { get; set; }
+        public FormateurService WebService { get; set; }
 
         public bool IsBusy
         {
@@ -100,11 +100,11 @@ namespace LearningCompany_WinRT.ViewModel
 
             // Si l'utilisateur a renseigné une url pour l'api dans les paramètres, on l'utilise.
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey("apiUrl"))
-                this.FormateurService = new FormateurService(ApplicationData.Current.LocalSettings.Values["apiUrl"] as string);
+                this.WebService = new FormateurService(ApplicationData.Current.LocalSettings.Values["apiUrl"] as string);
             else
-                this.FormateurService = new FormateurService();
+                this.WebService = new FormateurService();
 
-            this.CheckFromCache();
+            //this.CheckFromCache();
             this.CreateCommands();
         }
 
@@ -122,10 +122,10 @@ namespace LearningCompany_WinRT.ViewModel
 
         public void Load()
         {
-            if (!this.IsDataLoaded && !this.IsDataCached)
+            //if (!this.IsDataLoaded && !this.IsDataCached)
                 this.RefreshData();
-            else if (!this.IsDataLoaded && this.IsDataCached)
-                this.LoadFromCache();
+            //else if (!this.IsDataLoaded && this.IsDataCached)
+            //    this.LoadFromCache();
         }
 
         public async void RefreshData()
@@ -145,20 +145,27 @@ namespace LearningCompany_WinRT.ViewModel
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey("apiUrl"))
             {
                 var url = ApplicationData.Current.LocalSettings.Values["apiUrl"] as string;
-                if (url != this.FormateurService._serviceUrl)
-                    this.FormateurService = new FormateurService(url);
+                if (url != this.WebService._serviceUrl)
+                    this.WebService = new FormateurService(url);
             }
 
             try
             {
                 //await System.Threading.Tasks.Task.Delay(3000);
 
-                IEnumerable<Formateur> formateursTemp = await FormateurService.GetAll();
+                IEnumerable<Formateur> formateursTemp = await WebService.GetAll();
+
+                // Ajout de l'adresse complète pour les photos
+                foreach(var aFormateur in formateursTemp)
+                {
+                    aFormateur.UrlPhoto = WebService.GetBaseUrl() + aFormateur.UrlPhoto;           
+                }
+
                 this.Formateurs = formateursTemp.OrderBy(f => f.Nom).ToArray();
                 this.FormateursExternes = Formateurs.Where(f => f.IntervenantExterieur).OrderBy(f => f.Nom).ToArray();
                 this.FormateursInternes = Formateurs.Where(f => !f.IntervenantExterieur).OrderBy(f => f.Nom).ToArray();
 
-                this.SaveInCache();
+                //this.SaveInCache();
 
                 this.IsDataLoaded = true;
             }
@@ -178,55 +185,55 @@ namespace LearningCompany_WinRT.ViewModel
             IsBusy = false;
         }
 
-        public async void LoadFromCache()
-        {
-            var cacheFolder = await this._localFolder.GetFolderAsync("LocalCache");
+        //public async void LoadFromCache()
+        //{
+        //    var cacheFolder = await this._localFolder.GetFolderAsync("LocalCache");
 
-            XmlSerializer serializer = new XmlSerializer(typeof(Formateur[]));
-            StorageFile sampleFile = await cacheFolder.GetFileAsync(this._cacheName);
-            this.Formateurs = serializer.Deserialize(await sampleFile.OpenStreamForReadAsync()) as Formateur[];
+        //    XmlSerializer serializer = new XmlSerializer(typeof(Formateur[]));
+        //    StorageFile sampleFile = await cacheFolder.GetFileAsync(this._cacheName);
+        //    this.Formateurs = serializer.Deserialize(await sampleFile.OpenStreamForReadAsync()) as Formateur[];
 
-            this.FormateursExternes = Formateurs.Where(f => f.IntervenantExterieur).OrderBy(f => f.Nom).ToArray();
-            this.FormateursInternes = Formateurs.Where(f => !f.IntervenantExterieur).OrderBy(f => f.Nom).ToArray();
+        //    this.FormateursExternes = Formateurs.Where(f => f.IntervenantExterieur).OrderBy(f => f.Nom).ToArray();
+        //    this.FormateursInternes = Formateurs.Where(f => !f.IntervenantExterieur).OrderBy(f => f.Nom).ToArray();
 
-            this.IsDataLoaded = true;
-        }
+        //    this.IsDataLoaded = true;
+        //}
 
-        public async void SaveInCache()
-        {
-            var cacheFolder = await this._localFolder.GetFolderAsync("LocalCache");
+        //public async void SaveInCache()
+        //{
+        //    var cacheFolder = await this._localFolder.GetFolderAsync("LocalCache");
 
-            XmlSerializer serializer = new XmlSerializer(typeof(Formateur[]));
-            StorageFile sampleFile = await cacheFolder.CreateFileAsync(this._cacheName, CreationCollisionOption.ReplaceExisting);
-            var stream = await sampleFile.OpenStreamForWriteAsync();
-            serializer.Serialize(stream, this.Formateurs);
-            this.IsDataCached = true;
+        //    XmlSerializer serializer = new XmlSerializer(typeof(Formateur[]));
+        //    StorageFile sampleFile = await cacheFolder.CreateFileAsync(this._cacheName, CreationCollisionOption.ReplaceExisting);
+        //    var stream = await sampleFile.OpenStreamForWriteAsync();
+        //    serializer.Serialize(stream, this.Formateurs);
+        //    this.IsDataCached = true;
 
-            stream.Dispose();
-        }
+        //    stream.Dispose();
+        //}
 
-        private async void CheckFromCache()
-        {
-            // vérification du dossier de cache, si n'existe ps il sera crée.
-            StorageFolder cacheFolder;
+        //private async void CheckFromCache()
+        //{
+        //    // vérification du dossier de cache, si n'existe ps il sera crée.
+        //    StorageFolder cacheFolder;
 
-            try { cacheFolder = await this._localFolder.GetFolderAsync("LocalCache"); }
-            catch { cacheFolder = null; }
+        //    try { cacheFolder = await this._localFolder.GetFolderAsync("LocalCache"); }
+        //    catch { cacheFolder = null; }
 
-            if (cacheFolder == null)
-                await this._localFolder.CreateFolderAsync("LocalCache");
+        //    if (cacheFolder == null)
+        //        await this._localFolder.CreateFolderAsync("LocalCache");
 
-            // vérification de l'existence du fichier de cache
-            try 
-            {
-                await cacheFolder.GetFileAsync(this._cacheName);
-                this.IsDataCached = true;
-            } 
-            catch 
-            {
-                this.IsDataCached = false;
-            }
-        }
+        //    // vérification de l'existence du fichier de cache
+        //    try 
+        //    {
+        //        await cacheFolder.GetFileAsync(this._cacheName);
+        //        this.IsDataCached = true;
+        //    } 
+        //    catch 
+        //    {
+        //        this.IsDataCached = false;
+        //    }
+        //}
 
         private void OnShowFormateur(SelectionChangedEventArgs arg)
         {
